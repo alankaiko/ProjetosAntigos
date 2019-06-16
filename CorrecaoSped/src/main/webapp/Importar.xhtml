@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/template/LayoutPadrao.xhtml">
+
+
+	<!-- link que explica direitinha como funciona  esse modelo de SELECIONAR ARQUIVO -->
+	<!-- https://translate.google.com.br/translate?hl=pt-BR&sl=en&u=https://jsflive.wordpress.com/2013/04/23/jsf22-file-upload/&prev=search -->
+	<ui:define name="corpo">	
+		<div class="main-div">
+			<div class="div-importar">
+				<h:form enctype="multipart/form-data">
+					<h:outputLabel value="Arquivo" for="arquivo"/>
+					<h:inputFile id="arquivo" required="true" label="Arquivo" value="#{beanCFOP.arquivo}" validator="#{beanCFOP.Validar}"/>
+					
+					<div>
+						<h:commandButton value="Importar" styleClass="botao" action="#{beanCFOP.Importar}"/>
+					</div>
+				</h:form>
+			</div>
+			
+			
+		</div>
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+	<h4>Nível de Consciência</h4>
+	
+	<h:panelGrid columnClasses="colunaEsquerda, colunaDireita" columns="2" style="width:80%; margin: 0 auto;">
+		<p:selectBooleanCheckbox itemLabel="Hemorragia" value="#{MBCadProntuario.prontuario.integHemorragia.checkHemorragia}"/>
+		<p:inputTextarea style="width: 100%;" value="#{MBCadProntuario.prontuario.inteHemoText}"/>
+		
+		<p:selectBooleanCheckbox itemLabel="Dispnéia" value="#{MBCadProntuario.prontuario.integHemorragia.checkDispneia}"/>
+		<p:inputTextarea style="width: 100%;" value="#{MBCadProntuario.prontuario.inteDispText}"/>
+		
+		<p:selectBooleanCheckbox itemLabel="Edema" value="#{MBCadProntuario.prontuario.integHemorragia.checkEdema}"/>
+		<p:inputTextarea style="width: 100%;" value="#{MBCadProntuario.prontuario.inteEdemaText}"/>
+		
+		<p:selectBooleanCheckbox itemLabel="Descamação" value="#{MBCadProntuario.prontuario.integHemorragia.checkDescamacao}"/>
+		<p:inputTextarea style="width: 100%;" value="#{MBCadProntuario.prontuario.inteDescText}"/>
+		
+		<p:selectBooleanCheckbox itemLabel="Hematoma" value="#{MBCadProntuario.prontuario.integHemorragia.checkHematoma}"/>
+		<p:inputTextarea style="width: 100%;" value="#{MBCadProntuario.prontuario.inteHemaText}"/>
+		
+		<p:selectBooleanCheckbox itemLabel="Cicatriz" value="#{MBCadProntuario.prontuario.integHemorragia.checkCicatriz}"/>
+		<p:inputTextarea style="width: 100%;" value="#{MBCadProntuario.prontuario.inteCicaText}"/>
+		
+		<p:selectBooleanCheckbox itemLabel="Outros" value="#{MBCadProntuario.prontuario.integHemorragia.checkOutroInt}"/>
+		<p:inputTextarea style="width: 100%;" value="#{MBCadProntuario.prontuario.inteOutrosText}"/>
+	</h:panelGrid>
+	
+	
+</ui:composition>

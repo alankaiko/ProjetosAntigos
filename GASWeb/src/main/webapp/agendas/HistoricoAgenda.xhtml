@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/WEB-INF/templates/LayoutCadastro.xhtml">
+	
+	<f:metadata>
+		<f:viewParam name="nomeCliente" value="#{MBHistoricoAgendamento.nome}"/>
+		<f:viewAction action="#{MBHistoricoAgendamento.ListarPorPaciente}"/>
+	</f:metadata>
+	
+	<ui:define name="titulo">Histórico de Agendamento</ui:define>
+	
+	<ui:define name="corpo">
+		<h:form id="formulario">
+			<div class="layout-content">
+				<div class="conteudo-principal">
+					<div>
+						<p:toolbar>
+				            <p:toolbarGroup>
+				                <p:button value="Relatório" icon="fa fa-fw fa-plus"/>
+					        </p:toolbarGroup>
+				            
+				            <p:toolbarGroup align="right">
+					            <p:button value="Voltar" icon="fa fa-fw fa-search" outcome="/agendas/GerenciarAgendas"/>
+					        </p:toolbarGroup>
+			   			</p:toolbar>  
+					</div>
+					
+					<h3>Histórico de Agendamento</h3>
+					
+					<p:dataTable id="gerencial" value="#{MBHistoricoAgendamento.listaAgenda}" var="lista" 
+						paginator="true" rows="12" style="margin-top: 20px">
+						
+						<p:column headerText="Data Registro">
+							<h:outputLabel value="#{lista.data}">
+								<f:convertDateTime pattern="dd/MM/yyyy"/>
+							</h:outputLabel>
+						</p:column>
+						
+						<p:column headerText="Hora Registrada">
+								<h:outputText value="#{lista.horaDesejada}"/>
+						</p:column>
+						
+						<p:column headerText="Paciente">
+								<h:outputText value="#{lista.paciente.nome}"/>
+						</p:column>
+						
+						<p:column headerText="Tipo Agendamento">
+							<h:outputText value="#{lista.tipoAgendamento}"/>
+						</p:column>
+						
+						<p:column headerText="Status Agend.">
+							<h:outputText value="#{lista.statusAgendamento}"/>
+						</p:column>
+						
+						<p:column headerText="Data Entrada">
+							<h:outputText value="#{lista.dataEntrada}"/>
+						</p:column>
+						
+						<p:column headerText="Observação">
+							<h:outputText value="#{lista.observacao}"/>
+						</p:column>
+					</p:dataTable>
+				</div>
+			</div>
+		</h:form>
+		
+		
+		<p:confirmDialog header="Exclusão de Paciente" widgetVar="confirmaExclusao" id="confirmaExclusaoDialog"
+			message="Tem certeza que deseja excluir o Paciente #{MBPaciente.pacienteSelecionado.nome}">
+			<h:form style="text-align: center;">
+				<p:button value="Não" onclick="PF('confirmaExclusao').hide(); return false;"/>
+				
+				<p:commandButton value="Sim" oncomplete="PF('confirmaExclusao').hide();"
+					action="#{MBPaciente.Excluir}" actionListener="#{MBPaciente.Redirecionar}" process="@this" ajax="false"/>
+			</h:form>
+		</p:confirmDialog>
+	</ui:define>
+
+
+
+</ui:composition>

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/WEB-INF/templates/LayoutCadastro.xhtml">
+	
+	
+	<p:growl id="messages" showDetail="true" />
+	
+	<ui:define name="titulo">Agendamento de horário</ui:define>
+	
+	<ui:define name="corpo">
+	<h:form>
+		<div class="layout-content">
+			<div class="ui-g dashboard">
+				<h:panelGrid columnClasses="value">
+			        <h3 style="margin-top: 0">Agenda</h3>
+			        
+			        <p:schedule id="schedule" value="#{MBAgendamento.eventModel}" widgetVar="myschedule" timeZone="GMT+2">
+		 
+			            <p:ajax event="dateSelect" listener="#{MBAgendamento.onDateSelect}" update="eventos" oncomplete="PF('eventDialog').show();" />
+			            <p:ajax event="eventSelect" listener="#{MBAgendamento.onEventSelect}" update="eventos" oncomplete="PF('eventDialog').show();" />
+			            <p:ajax event="eventMove" listener="#{MBAgendamento.onEventMove}"/>
+		       		</p:schedule>
+		    	</h:panelGrid>
+	    	</div>
+    	</div>
+	</h:form>
+   
+   
+    <p:dialog id="eventos" widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip" style="font-size:70%;">
+   	 	<h:panelGrid id="painelGridPai">
+	   	 	<h:form id="formulario" style="text-align: -moz-center;">
+	   	 		<h:panelGrid style="width: 100%;">				
+					 <h:panelGrid columns="4" columnClasses="colunaClasses,colunaClasses,colunaClasses,colunaClasses">    
+			            <p:outputLabel value="Agenda Hora"/>
+			            <p:outputLabel value="Agendar Data"/>
+			            <p:outputLabel value="Tipo Agendamento"/>
+			            <p:outputLabel value="Status"/>
+			            
+			            <p:selectOneMenu value="#{MBAgendamento.agenda.horaDesejada}">
+							<f:selectItems value="#{MBAgendamento.horasLista}"/>
+						</p:selectOneMenu>
+			            
+			             <p:calendar value="#{MBAgendamento.data}" timeZone="GMT+2" pattern="dd/MM/yyyy"/>
+			             
+			            <p:selectOneMenu value="#{MBAgendamento.agenda.tipoAgendamento}">
+							<f:selectItems value="#{MBAgendamento.tipoAgendamento}"/>
+						</p:selectOneMenu>	  
+						
+						 <p:selectOneMenu value="#{MBAgendamento.agenda.statusAgendamento}">
+							<f:selectItems value="#{MBAgendamento.statusAgendamento}"/>
+						</p:selectOneMenu>	            
+		        	</h:panelGrid>  
+		        	 
+		        	<p:separator/>
+	        	
+	   	 			<h:panelGrid columns="4" columnClasses="colunaProcura,colunaProcuraTexto,colunaProcura,colunaProcura">   
+		   	 			<p:commandLink style="margin-right: 5px; text-decoration: underline;" value="Procurar" onclick="PF('confirmaPac').show()"/>
+						<p:inputText value="#{MBAgendamento.agenda.paciente.nome}" placeholder="Nome obrigatório"/>
+						
+						<h:outputText value="Entrada" style="margin-left: 15%;margin-right: 5px;"/>
+						<p:calendar value="#{MBAgendamento.agenda.dataEntrada}" pattern="dd/MM/yyyy"/>
+	   	 			</h:panelGrid>  
+	   	 			
+	   	 			<h:panelGrid columns="4" columnClasses="colunaClasses,colunaClasses,colunaClasses,colunaClasses">
+	   	 				<h:outputText value="Nascimento"/>
+	   	 				<h:outputText value="Sexo"/>
+	   	 				<h:outputText value="Cor"/>
+	   	 				<h:outputText value="Estado Civil"/>
+	   	 				
+	   	 				<p:calendar value="#{MBAgendamento.agenda.paciente.dataNasc}"/>						
+						
+						<p:selectOneMenu value="#{MBAgendamento.agenda.paciente.sexo}">
+							<f:selectItems value="#{MBAgendamento.sexo}"/>
+						</p:selectOneMenu>						
+						
+						<p:selectOneMenu value="#{MBAgendamento.agenda.paciente.raca}">
+							<f:selectItems value="#{MBAgendamento.raca}"/>
+						</p:selectOneMenu>						
+						
+						<p:selectOneMenu value="#{MBAgendamento.agenda.paciente.estadoCivil}">
+							<f:selectItems value="#{MBAgendamento.estadoCivil}"/>
+						</p:selectOneMenu>
+	   	 			</h:panelGrid>
+	   	 			
+	   	 			<h:panelGrid columns="4" columnClasses="colunaProcura,colunaProcuraCampos,colunaProcura,colunaProcuraCampos">
+	   	 				<h:outputText value="Naturalidade" style="margin-right: 5px;"/>
+	   	 				<p:inputText value="#{MBAgendamento.agenda.paciente.naturalidade}"/>
+	   	 				
+	   	 				<h:outputText value="Procedência" style="margin-right: 5px;"/>
+						<p:inputText value="#{MBAgendamento.agenda.paciente.procedencia}"/>
+	   	 			</h:panelGrid>
+					
+					<h:panelGrid columns="4" columnClasses="colunaProcura,colunaProcuraTexto,colunaProcura,colunaProcura"> 
+						<h:outputText value="Logradouro" style="margin-right: 24px;"/>
+						<p:inputText value="#{MBAgendamento.agenda.paciente.endereco.logradouro}"/>
+						
+						<h:outputText value="Cidade"/>
+						<p:inputText value="#{MBAgendamento.agenda.paciente.endereco.cidade}"/>	
+					</h:panelGrid>
+					
+					
+					<h:panelGrid columns="4" columnClasses="colunaClasses,colunaClasses,colunaClasses,colunaClasses">
+						<h:outputText value="Estado"/>
+						<h:outputText value="CEP"/>
+						<h:outputText value="Fone"/>
+						<h:outputText value="Profissão"/>
+						
+						<p:inputText value="#{MBAgendamento.agenda.paciente.endereco.estado}"/>						
+						<p:inputMask mask="99.999-999" value="#{MBAgendamento.agenda.paciente.endereco.cep}"/>						
+						<p:inputMask mask="(99) 9 9999-9999" value="#{MBAgendamento.agenda.paciente.contato.celular}"/>	
+						<p:inputText value="#{MBAgendamento.agenda.paciente.profissao}"/>
+					</h:panelGrid>
+					
+					<h:panelGrid columns="3" columnClasses="colunaClasses,colunaClasses,colunaClasses">
+						<h:outputText value="CPF"/>
+						<h:outputText value="RG"/>
+						<h:outputText value="E-mail" style="margin-right: 60px;"/>
+						
+						<p:inputMask mask="999.999.999-99" value="#{MBAgendamento.agenda.paciente.cpf}" placeholder="CPF obrigatório"/>
+						<p:inputMask mask="9?9999999" value="#{MBAgendamento.agenda.paciente.rg}" placeholder="RG obrigatório"/>
+						<p:inputText value="#{MBAgendamento.agenda.paciente.contato.email}"/>
+					</h:panelGrid>
+	   	 		</h:panelGrid>
+	   	 		
+	   	 		<p:separator/>
+	   	 		
+	   	 		<h:panelGrid style="width: 100%;">	
+	   	 			<h:panelGrid columns="4" columnClasses="colunaProcura,colunaProcuraCampos,colunaFiliacao,colunaProcuraCampos">	
+	   	 				<h:outputText value="Filiação" style="margin-right: 5px;"/>
+	   	 				<p:inputText value="#{MBAgendamento.agenda.paciente.filiacaoPai}" placeholder="Nome do Pai"/>
+		   	 			<h:outputText value="e " style="margin-right: 5px;"/>
+		   	 			<p:inputText value="#{MBAgendamento.agenda.paciente.filiacaoMae}" placeholder="Nome da Mãe"/>
+	   	 			</h:panelGrid>
+	   	 			
+	   	 			<h:panelGrid columns="4" columnClasses="colunaProcura,colunaProcuraCampos,colunaFiliacao,colunaProcuraCampos">
+	   	 				<h:outputText value="Cônjugue"/>
+	   	 				<p:inputText value="#{MBAgendamento.agenda.paciente.conjugue.conjugue}"/>
+	   	 				
+	   	 				<h:outputText value="Profissão"/>
+	   	 				<p:inputText value="#{MBAgendamento.agenda.paciente.conjugue.profissaoConjugue}" placeholder="Profissão cônjugue"/>
+	   	 			</h:panelGrid>
+	   	 			
+	   	 			<h:panelGrid columns="4" columnClasses="colunaProcura,colunaProcuraCampos,colunaFiliacao,colunaProcuraCampos">
+	   	 				<h:outputText value="Indicação"/>
+	   	 				<p:inputText value="#{MBAgendamento.agenda.indicacao}"/>
+	   	 				
+	   	 				<h:outputText value="Fone"/>
+	   	 				<p:inputMask mask="(99) 9 9999-9999" value="#{MBAgendamento.agenda.paciente.conjugue.telefoneConjugue}"/>
+	   	 			</h:panelGrid>  	 			
+	   	 		</h:panelGrid>
+	   	 		
+	   	 		<p:separator/>
+	   	 		
+	   	 		<h:panelGroup class="painelGrupoBotao">
+	   	 			<div id="botaoCadastro">
+						<p:commandButton value="Voltar" onclick="PF('eventDialog').hide(); return false;" icon="fa fa-fw fa-reply"/>
+					</div>
+					
+					<div id="botaoCadastro">
+						<p:commandButton oncomplete="if(#{MBAgendamento.agenda.paciente.nome != ''}) {PF('confirmaExclusao').show()}" process="@this" value="Remover"
+								icon="fa fa-fw fa-trash">
+								<f:setPropertyActionListener value="#{MBAgendamento.agenda}" target="#{MBAgendamento.agendaSelecionado}"/>
+							</p:commandButton>
+					</div>
+					
+	   	 			<div id="botaoCadastro">
+						<p:button icon="fa fa-fw fa-history" value	="Histórico" outcome="/agendas/HistoricoAgenda">
+							<f:param name="nomeCliente" value="#{MBAgendamento.agenda.paciente.nome}"/>
+						</p:button>
+					</div>
+					
+					<div id="botaoCadastro">
+						<p:commandButton value="Clínica" icon="fa fa-fw fa-medkit"/>
+					</div>
+					
+					<div id="botaoCadastro">
+						<p:commandButton value="Inserir" icon="fa fa-fw fa-plus-square-o"/>
+					</div>
+					
+					<div id="botaoCadastro">
+						<p:commandButton value="Procurar" icon="fa fa-fw fa-search-plus" onclick="PF('confirmaPac').show()"/>
+					</div>
+					
+					<div id="botaoCadastro">
+						<p:commandButton id="addButton" value="Agendar" actionListener="#{MBAgendamento.SalvarPaciente}" action="#{MBAgendamento.addEvent}" 
+		        		onsuccess="if(#{MBAgendamento.agenda.paciente.nome != ''}) {PF('myschedule').update();PF('eventDialog').hide();}" icon="fa fa-fw fa-floppy-o"/>
+					</div>
+	   	 		</h:panelGroup>
+	   	 		
+	        </h:form>
+        </h:panelGrid>
+    </p:dialog>    
+    
+    
+    <p:confirmDialog id="confirmaPaciente" widgetVar="confirmaPac">
+			<h:form >
+				<p:dataTable var="item" value="#{MBAgendamento.listaPaciente}"
+					selectionMode="single" selection="#{MBAgendamento.paciente}" rowKey="#{item.id}">
+					
+					 <p:ajax event="rowSelect" listener="#{MBAgendamento.PegaPaciente}" 
+					 	onsuccess="PF('confirmaPac').hide()" update=":formulario" process="@this"/>
+					
+					<p:column headerText="Código">
+						<h:outputText value="#{item.id}"/>
+					</p:column>
+					
+					<p:column headerText="Nome">
+						<h:outputText value="#{item.nome}"/>
+					</p:column>
+					
+					<p:column headerText="CPF">
+						<h:outputText value="#{item.cpf}"/>
+					</p:column>
+					
+					<p:column headerText="RG">
+						<h:outputText value="#{item.rg}"/>
+					</p:column>
+					
+					<p:column headerText="Telefone">
+						<h:outputText value="#{item.contato.telefone}"/>
+					</p:column>
+					
+					<p:column headerText="Cidade">
+						<h:outputText value="#{item.endereco.cidade}"/>
+					</p:column>
+					
+				</p:dataTable>
+			</h:form>
+		</p:confirmDialog>
+		
+		<p:confirmDialog id="confirmaFuncionario" widgetVar="confirmaFun">
+			<h:form >
+				<p:dataTable var="item" value="#{MBAgendamento.listaFuncionario}"
+					selectionMode="single" selection="#{MBAgendamento.funcionario}" rowKey="#{item.id}">
+					
+					 <p:ajax event="rowSelect" listener="#{MBAgendamento.PegaFuncionario}" 
+					 	onsuccess="PF('confirmaFun').hide()" update=":formulario"/>
+					
+					<p:column headerText="Código">
+						<h:outputText value="#{item.id}"/>
+					</p:column>
+					
+					<p:column headerText="Nome">
+						<h:outputText value="#{item.nome}"/>
+					</p:column>
+					
+					<p:column headerText="CPF">
+						<h:outputText value="#{item.cpf}"/>
+					</p:column>
+					
+					<p:column headerText="RG">
+						<h:outputText value="#{item.rg}"/>
+					</p:column>
+					
+					<p:column headerText="Telefone">
+						<h:outputText value="#{item.contato.telefone}"/>
+					</p:column>
+					
+					<p:column headerText="Cidade">
+						<h:outputText value="#{item.endereco.cidade}"/>
+					</p:column>
+					
+				</p:dataTable>
+			</h:form>
+		</p:confirmDialog>
+		
+		<p:confirmDialog header="Excluir Agenda?" widgetVar="confirmaExclusao" id="confirmaExclusaoDialog"
+			message="Tem certeza que deseja desfazer o agendamento?">
+			<h:form>
+				<p:button value="Não" onclick="PF('confirmaExclusao').hide(); return false;"/>
+				
+				<p:commandButton value="Sim" oncomplete="PF('confirmaExclusao').hide();"
+					action="#{MBAgendamento.Excluir}" actionListener="#{MBAgendamento.Redirecionar}" process="@this" ajax="false"/>
+			</h:form>
+		</p:confirmDialog>
+	</ui:define>
+</ui:composition>
+
+

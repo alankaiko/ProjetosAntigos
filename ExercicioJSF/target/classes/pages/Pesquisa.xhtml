@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+	<f:metadata>
+		<f:viewAction action="#{MBPessoa.CarregarLista}"/>
+	</f:metadata>
+	
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<title>Pagina de Pesquisa</title>
+		<h:outputStylesheet library="css" name="sistema.css" />
+	</h:head>
+	
+	<h:body>
+		<h:form id="formulario">
+			<h:dataTable id="tabela" value="#{MBPessoa.listaPessoa}" var="lista">
+				<h:column headerClass="Código">
+					<h:outputLabel value="#{lista.id}"/>
+				</h:column>
+				
+				<h:column headerClass="Código" >
+					<h:outputLabel value="#{lista.nome}"/>
+				</h:column>
+				
+				<h:column headerClass="Idade">
+					<h:outputLabel value="#{lista.idade}"/>
+				</h:column>
+				
+				<h:column headerClass="CPF">
+					<h:outputLabel value="#{lista.cpf}"/>
+				</h:column>
+				
+				<h:column headerClass="Opções">
+					<h:button value="Editar" outcome="/pages/Cadastrar">
+						<f:param name="editaPessoa" value="#{lista.id}"/>
+					</h:button>					
+					
+					<h:commandButton value="Excluir"/>
+				</h:column>
+			</h:dataTable>
+			
+			<h:panelGrid>
+				<h:commandButton value="Novo Cadastro" action="/pages/Cadastrar"/>
+			</h:panelGrid>
+		</h:form>
+	</h:body>
+</html>

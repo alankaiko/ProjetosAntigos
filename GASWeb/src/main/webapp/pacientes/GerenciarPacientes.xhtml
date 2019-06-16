@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/WEB-INF/templates/LayoutCadastro.xhtml">
+	
+	<f:metadata>
+		<f:viewAction action="#{MBPaciente.ListarPacientes}"/>
+	</f:metadata>
+	
+	<ui:define name="titulo">Gerenciar Pacientes</ui:define>
+	
+	<ui:define name="corpo">
+		<h:form id="formulario">
+			<div class="layout-content">
+				<div class="conteudo-principal">
+					<div>
+						<p:toolbar>
+				            <p:toolbarGroup>
+				                <p:button value="Novo" icon="fa fa-fw fa-plus" outcome="/pacientes/Paciente"/>
+					        </p:toolbarGroup>
+				            
+				            <p:toolbarGroup align="right">
+					            <p:button value="Pesquisar" icon="fa fa-fw fa-search" outcome="/pacientes/GerenciarPacientes"/>
+					        </p:toolbarGroup>
+			   			</p:toolbar>  
+					</div>
+			
+					<p:dataTable id="gerencial" value="#{MBPaciente.listaPaciente}" var="lista" 
+						paginator="true" rows="12" style="margin-top: 20px">
+						<p:column headerText="Código" style="text-align: center; width: 5%">
+							<h:outputText value="#{lista.id}"/>
+						</p:column>
+						
+						<p:column headerText="Identificação">
+								<h:outputText value="#{lista.nome}"/>
+						</p:column>
+						
+						<p:column headerText="CPF" style="text-align: center; width: 12%">
+							<h:outputText value="#{lista.cpf}"/>
+						</p:column>
+						
+						<p:column headerText="Celular" style="text-align: center; width: 10%">
+							<h:outputText value="#{lista.contato.celular}"/>
+						</p:column>
+						
+						<p:column headerText="Cidade" style="width: 18%;">
+							<h:outputText value="#{lista.endereco.cidade}"/>
+						</p:column>
+						
+						<p:column headerText="Opções" id="colunaExcluir" style="text-align: center; width: 8%">
+							<p:button icon="fa fa-fw fa-edit" title="Editar" outcome="/pacientes/Paciente">
+								<f:param name="editaPaciente" value="#{lista.id}"/>
+							</p:button>
+							
+							<p:commandButton oncomplete="PF('confirmaExclusao').show()" process="@this" title="Excluir"
+								icon="fa fa-fw fa-trash" update=":confirmaExclusaoDialog">
+								
+								<f:setPropertyActionListener value="#{lista}" target="#{MBPaciente.pacienteSelecionado}"/>
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</div>
+			</div>
+		</h:form>
+		
+		
+		<p:confirmDialog header="Exclusão de Paciente" widgetVar="confirmaExclusao" id="confirmaExclusaoDialog"
+			message="Tem certeza que deseja excluir o Paciente #{MBPaciente.pacienteSelecionado.nome}">
+			<h:form style="text-align: center;">
+				<p:button value="Não" onclick="PF('confirmaExclusao').hide(); return false;"/>
+				
+				<p:commandButton value="Sim" oncomplete="PF('confirmaExclusao').hide();"
+					action="#{MBPaciente.Excluir}" actionListener="#{MBPaciente.Redirecionar}" process="@this" ajax="false"/>
+			</h:form>
+		</p:confirmDialog>
+	</ui:define>
+
+
+
+</ui:composition>

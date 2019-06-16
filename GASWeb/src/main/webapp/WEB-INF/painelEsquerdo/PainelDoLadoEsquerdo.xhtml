@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<ui:composition>
+		<div class="layout-sidebar">
+			<ul id="layout-menu">
+				<h:form id="formesquerdo">
+					<li class="sidebar-arquivo">
+						<a>
+							<i class="icone fa fa-folder-open"></i>
+						</a>
+					</li>
+					
+					<li class="sidebar-atendimento">
+						<a>
+							<i class="icone fa fa-calendar-o"></i>
+						</a>
+					</li>
+					
+					<li class="sidebar-cadastro">
+						<a>
+							<i class="icone fa fa-language"></i>
+						</a>
+					</li>
+					
+					<li class="sidebar-usuarios">
+						<a>
+							<i class="icone fa fa-image"></i>
+						</a>
+					</li>
+					
+					<li class="sidebar-farmacia">
+						<a>
+							<i class="icone fa fa-calendar"></i>
+						</a>
+					</li>
+					
+					<li class="sidebar-relatorios">
+						<a>
+							<i class="icone fa fa-folder-open"></i>
+						</a>
+					</li>
+				</h:form>
+			</ul>
+			<div id="layout-aberto">
+				<ul id="arquivo" class="menuopcao">
+					<h:form>
+						<li class="clearfix">
+							<a href="/GASWeb/agendas/GerenciarAgendas.xhtml">
+								<i class="icone fa fa-book"></i>
+								<span>Agenda Clínica</span>
+							</a>
+						</li>
+						
+						<li>
+							<a>
+								<i class="icone fa fa-bookmark"></i>
+								<span>Consulta Atendimento</span>
+							</a>
+						</li>
+						
+						<li>
+							<a>
+								<i class="icone fa fa-hospital-o"></i>
+								<span>Acomodações</span>
+							</a>
+						</li>
+					</h:form>
+				</ul>
+				
+				<ul id="atendimento" class="menuopcao">
+					<h:form>
+						<li>
+							<a href="/GASWeb/prontuarios/GerenciarProntuarios.xhtml">
+								<i class="icone fa fa-medkit"></i>
+								<span>Gerenciar Prontuários</span>
+							</a>
+						</li>
+						
+						<li>
+							<a href="/GASWeb/pacientes/Paciente.xhtml">
+								<i class="icone fa fa-user"></i>
+								<span>Incluir Pacientes</span>
+							</a>
+						</li>
+					</h:form>
+				</ul>
+				
+				<ul id="cadastro" class="menuopcao">
+					<h:form>
+						<li>
+							<a href="/GASWeb/convenios/GerenciarConvenios.xhtml">
+								<i class="icone fa fa-hospital-o"></i>
+								<span>Gerenciar Convênios</span>
+							</a>
+						</li>
+						
+						<li>
+							<a>
+								<i class="icone fa fa-h-square"></i>
+								<span>Incluir Clínicas</span>
+							</a>
+						</li>
+						
+						<li>
+							<a href="/GASWeb/pacientes/GerenciarPacientes.xhtml">
+								<i class="icone fa fa-user"></i>
+								<span>Gerenciar Pacientes</span>
+							</a>
+						</li>
+					</h:form>
+				</ul>
+				
+				<ul id="usuarios" class="menuopcao">
+					<h:form>
+						<li>
+							<a href="/GASWeb/funcionarios/Funcionario.xhtml">
+								<i class="icone fa fa-user"></i>
+								<span>Cadastro de Funcionários</span>
+							</a>
+						</li>
+						
+						<li>
+							<a href="/GASWeb/funcionarios/GerenciarFuncionarios.xhtml">
+								<i class="icone fa fa-group"></i>
+								<span>Gerenciar Funcionários</span>
+							</a>
+						</li>
+						
+						<li>
+							<a href="/GASWeb/usuarios/GerenciarUsuarios.xhtml">
+								<i class="icone fa fa-group"></i>
+								<span>Gerenciar Usuários</span>
+							</a>
+						</li>
+					</h:form>
+				</ul>
+				
+				<ul id="farmacia" class="menuopcao">
+					<h:form>
+						<li>
+							<a href="/GASWeb/fabricantes/GerenciarFabricantes.xhtml">
+								<i class="icone fa fa-building"></i>
+								<span>Cadastro de Fabricantes</span>
+							</a>
+						</li>
+						
+						<li>
+							<a>
+								<i class="icone fa fa-tasks"></i>
+								<span>Grupo de Produtos</span>
+							</a>
+						</li>
+						
+						<li>
+							<a href="/GASWeb/produtos/GerenciarProdutos.xhtml">
+								<i class="icone fa fa-product-hunt"></i>
+								<span>Cadastro de Produtos</span>
+							</a>
+						</li>
+						
+						<li>
+							<a>
+								<i class="icone fa fa-archive"></i>
+								<span>Motivo de Devoluções</span>
+							</a>
+						</li>
+					</h:form>
+				</ul>
+				
+				<ul id="relatorios" class="menuopcao">
+					<h:form>
+						<li>
+							<a>
+								<i class="icone fa fa-file-pdf-o"></i>
+								<span>Relatório de Itens</span>
+							</a>
+						</li>
+						
+						<li>
+							<a>
+								<i class="icone fa fa-file-pdf-o"></i>
+								<span>Relatório de Convênios</span>
+							</a>
+						</li>
+						
+						<li>
+							<a>
+								<i class="icone fa fa-file-pdf-o"></i>
+								<span>Relatório de Fornecedores</span>
+							</a>
+						</li>
+						
+						<li>
+							<a>
+								<i class="icone fa fa-file-pdf-o"></i>
+								<span>Relatório de Grupo de Itens</span>
+							</a>
+						</li>
+						
+						<li>
+							<a>
+								<i class="icone fa fa-file-pdf-o"></i>
+								<span>Relatório de Pacientes</span>
+							</a>
+						</li>
+						
+						<li>
+							<a>
+								<i class="icone fa fa-file-pdf-o"></i>
+								<span>Relatório de Funcionários</span>
+							</a>
+						</li>
+						
+						<li>
+							<a>
+								<i class="icone fa fa-file-pdf-o"></i>
+								<span>Relatório de Clínicas</span>
+							</a>
+						</li>
+						
+						<li>
+							<a>
+								<i class="icone fa fa-file-pdf-o"></i>
+								<span>Relatório de Prontuários</span>
+							</a>
+						</li>
+					</h:form>
+				</ul>
+			</div>
+		</div>
+	</ui:composition>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

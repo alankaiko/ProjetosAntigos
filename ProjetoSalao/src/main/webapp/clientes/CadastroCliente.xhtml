@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/template/LayoutPadrao.xhtml">
+	
+	<f:metadata>
+		<f:viewParam name="editaCliente" value="#{clienteBean.id}"/>
+		<f:event listener="#{clienteBean.CarregarClienteEditar}" type="preRenderView"></f:event>
+	</f:metadata>
+	
+	<ui:define name="titulo">Cadastro Cliente</ui:define>
+	
+	<ui:define name="corpo">
+		<h:form>
+			<div style="margin: 20px;">
+				<p:messages autoUpdate="true"/>
+				
+				<div>
+					<p:toolbar>
+			            <p:toolbarGroup>
+			                <p:button value="Novo" icon="fa fa-fw fa-plus" outcome="/clientes/CadastroCliente"/>
+			                <p:commandButton value="Salvar" ajax="false" icon="fa fa-fw fa-save" 
+			                action="#{clienteBean.SalvarCliente}" actionListener="#{clienteBean.Redirecionar}"/>  
+				        </p:toolbarGroup>
+			            
+			            <p:toolbarGroup align="right">
+				            <p:button value="Pesquisar" icon="fa fa-fw fa-search" outcome="/clientes/PesquisaClientes"/>
+				        </p:toolbarGroup>
+		   			</p:toolbar>  
+				</div>					
+						
+				<p:panelGrid columns="2">				
+					<p:outputLabel value="Código"/>
+					<p:inputText value="#{clienteBean.cliente.id}" readonly="true"/>
+					
+					<p:outputLabel value="Nome"/>
+					<p:inputText value="#{clienteBean.cliente.nome}"/>
+					
+					<p:outputLabel value="CPF"/>
+					<p:inputMask mask="999.999.999-99" value="#{clienteBean.cliente.cpf}"/>
+					
+					<p:outputLabel value="RG"/>
+					<p:inputText maxlength="8" value="#{clienteBean.cliente.rg}"/>
+				</p:panelGrid>			
+			</div>
+		</h:form>
+	</ui:define>	
+</ui:composition>

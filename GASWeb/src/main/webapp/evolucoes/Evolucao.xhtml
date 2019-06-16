@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/WEB-INF/templates/LayoutCadastro.xhtml">
+	
+	
+	<f:metadata>
+		<f:viewParam name="editaEvolucao" value="#{MBCadEvolucao.id}"/>
+		<f:event listener="#{MBCadEvolucao.CarregandoEvolucaoEditar}" type="preRenderView"></f:event>
+	</f:metadata>
+		
+	<ui:define name="titulo">Registro Evolução</ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="formulario">
+			<p:messages autoUpdate="true" closable="true" />
+			
+			<div class="layout-content">
+				<div class="conteudo-principal">
+					<div>
+						<p:toolbar style="margin-top: 25px">
+				            <p:toolbarGroup>
+				                <p:button value="Novo" icon="fa fa-fw fa-plus" outcome="/evolucoes/Evolucao"/>
+				                <p:commandButton value="Salvar" ajax="false" icon="fa fa-fw fa-save" 
+				                action="#{MBCadEvolucao.Salvando}" actionListener="#{MBCadEvolucao.Redirecionar}"/>  
+					        </p:toolbarGroup>
+				            
+				            <p:toolbarGroup align="right">
+					            <p:button value="Pesquisar" icon="fa fa-fw fa-search" outcome="/evolucoes/GerenciarEvolucoes"/>
+					        </p:toolbarGroup>
+			   			</p:toolbar>  
+					</div>
+		
+					<div>
+						<h3>Evolução</h3>
+						
+						<div id="painelCadastro" style="height: 450px; padding:0; position: relative;">
+							<div class="dadospessoais">
+								<span>Registro de dados</span>
+							</div>
+							
+							
+							<p:tabView>
+					    		<p:tab title="Dados Gerais">
+					    			<ui:include src="/WEB-INF/tabEvolucao/tabDadosGerais.html"/>
+					    		</p:tab>
+					    		
+					    		<p:tab title="Diagnóstico Principal">
+					    			<ui:include src="/WEB-INF/tabEvolucao/tabDiagnostico.xhtml"/>
+					    		</p:tab>
+					    		
+					    		<p:tab title="Estado geral">
+				    				<ui:include src="/WEB-INF/tabEvolucao/tabEstadogeral.xhtml"/>
+					    		</p:tab>
+					    		
+					    		<p:tab title="Outras">
+						    		<ui:include src="/WEB-INF/tabEvolucao/tabOutras.xhtml"/>
+					    		</p:tab>
+										    		
+					    	</p:tabView>
+					    	
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+		
+		
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/template/LayoutPadrao.xhtml">
+	
+	<f:metadata>
+		<f:viewAction action="#{pesquisaCliente.ListarTodos}"/>
+	</f:metadata>
+	
+	<ui:define name="titulo">Pesquisa de Clientes</ui:define>
+	
+	<ui:define name="corpo">
+		<div style="margin: 20px;">
+			<p:messages autoUpdate="true"/>
+			
+			<div>
+				<p:toolbar>
+		            <p:toolbarGroup>
+		                <p:button value="Novo" icon="fa fa-fw fa-plus" outcome="/clientes/CadastroCliente"/>
+			        </p:toolbarGroup>
+		            
+		            <p:toolbarGroup align="right">
+			            <p:button value="Pesquisar" icon="fa fa-fw fa-search" outcome="/clientes/PesquisaClientes"/>
+			        </p:toolbarGroup>
+	   			</p:toolbar>  
+			</div>
+			
+			<h:form>			
+				<p:dataTable value="#{pesquisaCliente.listaCliente}" var="lista" rows="8" paginator="true">
+					<p:column headerText="Código">
+						<p:outputLabel value="#{lista.id}"/>
+					</p:column>
+					
+					<p:column headerText="Nome">
+						<p:outputLabel value="#{lista.nome}"/>
+					</p:column>
+					
+					<p:column headerText="CPF">
+						<p:outputLabel value="#{lista.cpf}"/>
+					</p:column>
+					
+					<p:column headerText="RG">
+						<p:outputLabel value="#{lista.rg}"/>
+					</p:column>
+					
+					<p:column>
+						<p:button icon="fa fa-fw fa-edit" title="Editar" outcome="/clientes/CadastroCliente">
+							<f:param name="editaCliente" value="#{lista.id}"/>
+						</p:button>
+							
+						<p:commandButton oncomplete="PF('confirmaExclusao').show()" process="@this" title="Excluir"
+								icon="fa fa-fw fa-trash" update=":confirmaExclusaoDialog">
+								
+								<f:setPropertyActionListener value="#{lista}" target="#{pesquisaCliente.cliente}"/>
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+			
+			<p:confirmDialog header="Exclusão de Clientes" widgetVar="confirmaExclusao" id="confirmaExclusaoDialog"
+			message="Tem certeza que deseja excluir o cliente #{pesquisaCliente.cliente.nome}?" closeOnEscape="true">
+				<h:form>
+					<p:button value="Não" onclick="PF('confirmaExclusao').hide(); return false;"/>
+					
+					<p:commandButton value="Sim" oncomplete="PF('confirmaExclusao').hide();"
+						action="#{pesquisaCliente.ExcluirCliente}" actionListener="#{pesquisaCliente.Redirecionar}" process="@this" ajax="false"/>
+				</h:form>
+			</p:confirmDialog>
+		</div>
+	</ui:define>	
+</ui:composition>

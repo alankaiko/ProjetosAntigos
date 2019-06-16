@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<ui:composition>
+		<h:form>
+			<p:menubar>
+				<p:submenu label="Arquivo">
+					<p:menuitem value="Inicio" outcome="/index"/>
+					<p:menuitem value="Sobre"/>
+				</p:submenu>
+				
+				<p:submenu label="Agendamento">
+					<p:menuitem value="Agendar Salão" outcome="/agendamentos/Agendar"/>
+				</p:submenu>
+				
+				<p:submenu label="Cadastro">
+					<p:menuitem value="Apartamento" outcome="/apartamentos/PesquisaApartamentos"/>
+					<p:menuitem value="Cliente" outcome="/clientes/PesquisaClientes"/>
+				</p:submenu>
+				
+				<p:submenu label="Recursos">
+					<p:menuitem value="Cadastrar Salão" outcome="/salao/PesquisaSaloes"/>
+				</p:submenu>
+				
+				<p:menuitem value="Sair"/>
+			</p:menubar>
+		</h:form>
+	</ui:composition>
+	
+	
+</html>

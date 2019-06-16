@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+	<h4>Avaliação do Paciente</h4>
+	
+	<div id="divisoriaTab">
+		<p:selectOneRadio style="width: 60%;" value="#{MBCadProntuario.prontuario.condDeambulacao}">
+			 <f:selectItem itemLabel="Verbalizando" itemValue="Verbalizando"/>
+			 <f:selectItem itemLabel="Deâmbulante" itemValue="Deâmbulante"/>
+			 <f:selectItem itemLabel="Utiliza cadeira de rodas" itemValue="Utiliza cadeira de rodas"/>
+		</p:selectOneRadio>
+	</div>
+	
+	<div id="divisoriaTab">
+		<div>
+			<p:outputLabel class="labelTab" value="Observação"/>
+		</div>
+		
+		<div>
+			<p:inputTextarea class="textoArea" value="#{MBCadProntuario.prontuario.condDeamObservacao}"/>
+		</div>
+	</div>	
+	
+	<p:separator/>
+	
+	<h4>Repouso no Leito</h4>
+	
+	<p:selectOneRadio style="width: 40%;" value="#{MBCadProntuario.prontuario.condRepouso}">
+		<f:selectItem itemLabel="Relativo" itemValue="Relativo"/>
+		<f:selectItem itemLabel="Absoluto" itemValue="Absoluto"/>
+	</p:selectOneRadio>
+	
+	<p:separator/>
+	
+	<h4>Sono e Repouso</h4>
+	
+	<div id="divisoriaTab">
+		<div>
+			<p:outputLabel class="labelTab" value="Observação"/>
+		</div>
+		
+		<div>
+			<p:inputTextarea class="textoArea" value="#{MBCadProntuario.prontuario.condSono}"/>
+		</div>
+	</div>	
+	
+	<p:separator/>
+	
+	<h4>Condição de Chegada</h4>
+	
+	<div id="divisoriaTab">
+		<div>
+			<p:inputTextarea class="textoArea" value="#{MBCadProntuario.prontuario.textoAreachegada}"/>
+		</div>
+	</div>	
+</ui:composition>

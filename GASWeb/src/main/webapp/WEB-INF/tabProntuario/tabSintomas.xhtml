@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+	<h4>Especificar Sintomas</h4>
+	
+	<h:panelGrid columns="4" style="width: 80%;">
+		<p:selectBooleanCheckbox itemLabel="Náuseas" value="#{MBCadProntuario.prontuario.sintomasEsp.checkNauseas}"/>
+		
+		<p:selectBooleanCheckbox itemLabel="Mal estar" value="#{MBCadProntuario.prontuario.sintomasEsp.checkMalEstar}"/>
+		
+		<p:selectBooleanCheckbox itemLabel="Insônia" value="#{MBCadProntuario.prontuario.sintomasEsp.checkInsonia}"/>
+		
+		<p:selectBooleanCheckbox itemLabel="Prurido" value="#{MBCadProntuario.prontuario.sintomasEsp.checkPrurido}"/>
+	</h:panelGrid>
+		
+	<div id="divisoriaTab">
+		<div>
+			<p:outputLabel class="labelTab" value="Tipo, localização, intensidade e outras características"/>
+		</div>
+		
+		<div>
+			<p:inputTextarea class="textoArea" value="#{MBCadProntuario.prontuario.sintomasEspText}"/>
+		</div>
+	</div>	
+	
+	<p:separator/>
+	
+	<h4>Membros superiores e inferiores</h4>
+	
+	<h:panelGrid columns="3" style="width: 60%;">
+		<p:selectBooleanCheckbox itemLabel="Coloração" value="#{MBCadProntuario.prontuario.sintomasMembros.checkColoracao}"/>
+		
+		<p:selectBooleanCheckbox itemLabel="Perfusão" value="#{MBCadProntuario.prontuario.sintomasMembros.checkPerfusao}"/>
+		
+		<p:selectBooleanCheckbox itemLabel="Pulso" value="#{MBCadProntuario.prontuario.sintomasMembros.LPulso}"/>
+	</h:panelGrid>
+		
+	<div id="divisoriaTab">
+		<div>
+			<p:inputTextarea class="textoArea" value="#{MBCadProntuario.prontuario.sintomasMembText}"/>
+		</div>
+	</div>	
+	
+</ui:composition>

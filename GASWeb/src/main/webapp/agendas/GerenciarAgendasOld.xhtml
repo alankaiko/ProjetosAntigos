@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/WEB-INF/templates/LayoutCadastro.xhtml">
+	
+	<p:growl id="messages" showDetail="true" />
+	
+	<ui:define name="titulo">Agendamento de horário</ui:define>
+	
+	<ui:define name="corpo">
+	<h:form>
+		<div class="layout-content">
+			<div class="ui-g dashboard">
+				<h:panelGrid columnClasses="value">
+			        <h3 style="margin-top: 0">Agenda</h3>
+			        
+			        <p:schedule id="schedule" value="#{MBAgendamento.eventModel}" widgetVar="myschedule" timeZone="GMT+2">
+		 
+			            <p:ajax event="dateSelect" listener="#{MBAgendamento.onDateSelect}" update="eventos" oncomplete="PF('eventDialog').show();" />
+			            <p:ajax event="eventSelect" listener="#{MBAgendamento.onEventSelect}" update="eventos" oncomplete="PF('eventDialog').show();" />
+			            <p:ajax event="eventMove" listener="#{MBAgendamento.onEventMove}"/>
+			            <p:ajax event="eventResize" listener="#{MBAgendamento.onEventResize}"/>
+		 				
+		       		</p:schedule>
+		    	</h:panelGrid>
+	    	</div>
+    	</div>
+	</h:form>
+   
+   
+    <p:dialog id="eventos" widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
+   	 	<h:panelGrid columns="2">
+	   	 	<h:form id="formulario">
+	   	 		<div style="float: right; margin-right: 5%;">
+		   	 		<p:outputLabel value="Status" style="margin-right: 5px;"/>
+		            <p:selectOneMenu value="#{MBAgendamento.agenda.statusAgendamento}">
+						<f:selectItems value="#{MBAgendamento.statusAgendamento}"/>
+					</p:selectOneMenu>
+	   	 		</div>
+				
+		        <h:panelGrid id="panelPac" style="margin: 15px; width:100%;">
+					<h:panelGrid columns="1" style="width: 100%;">
+						<p:outputLabel value="Paciente"/>
+		       			<p:inputText value="#{MBAgendamento.agenda.paciente.nome}" style="width:92%;"/>
+					</h:panelGrid>        		
+		            
+		            <h:panelGrid columns="3">
+			            <p:outputLabel value="Celular" style="margin-right: 5px;"/>
+			             <p:outputLabel value="Fixo" style="margin-right: 5px;"/>
+			             <p:outputLabel value="Convênio" style="margin-right: 5px;"/>
+			            
+			            <p:inputText value="#{MBAgendamento.agenda.paciente.contato.celular}" style="margin-right: 5px;"/>
+			            <p:inputText value="#{MBAgendamento.agenda.paciente.contato.telefone}" style="margin-right: 5px;"/>
+			            <p:inputText value="#{MBAgendamento.agenda.paciente.convenio.nome}" style="margin-right: 5px;"/>
+		            </h:panelGrid>
+		            
+		            <h:panelGrid columns="1" style="width: 100%;">
+		                <p:outputLabel value="Email" style="width:25%; margin-right: 5px;"/>
+		        		<p:inputText value="#{MBAgendamento.agenda.paciente.contato.email}" style="width:92%;"/>
+	                </h:panelGrid>	            
+		        </h:panelGrid>
+		        
+		        <h:panelGrid style="width: 100%;">
+			        <p:commandButton value="Pesquisar" oncomplete="PF('confirmaPac').show()" process="@this" 
+		        		icon="fa fa-fw fa-search" style="float: right;"/>
+		        </h:panelGrid>
+	        	
+		        
+		        <p:separator/>
+		            
+		        <h:panelGrid columns="3" style="width: 100%;">    
+		        	<p:outputLabel value="Agendar Data"/>
+		            <p:outputLabel value="Agenda Hora"/>
+		            <p:outputLabel value="Tipo Agendamento"/>
+		           
+		            <p:calendar value="#{MBAgendamento.data}" timeZone="GMT+2" pattern="dd/MM/yyyy"/>
+		            
+		            <p:selectOneMenu value="#{MBAgendamento.agenda.horaDesejada}">
+						<f:selectItems value="#{MBAgendamento.horasLista}"/>
+					</p:selectOneMenu>
+		            
+		            <p:selectOneMenu value="#{MBAgendamento.agenda.tipoAgendamento}">
+						<f:selectItem itemLabel=""/>
+						<f:selectItems value="#{MBAgendamento.tipoAgendamento}"/>
+					</p:selectOneMenu>	            
+	        	</h:panelGrid>   
+		            
+		        <p:separator/>
+		           
+		        <h:panelGrid id="panelFunc" style="width: 100%;">    
+		       		<h:panelGrid columns="1" style="width: 100%;">
+						<p:outputLabel value="Atendido por"/>
+		       			<p:inputText value="#{MBAgendamento.agenda.funcionario.nome}" style="width:95%;"/>
+					</h:panelGrid>    
+					
+					<p:outputLabel value="Registro"/>
+					<h:panelGrid columns="4">	            
+			            <p:inputText value="#{MBAgendamento.agenda.funcionario.registroCoren.inscricao}"/>
+			            
+			            <p:inputText value="#{MBAgendamento.agenda.funcionario.registroCoren.coren}"/>
+		
+			            <p:inputText value="#{MBAgendamento.agenda.funcionario.registroCoren.uf}" style="width: 35%;"/>
+			            
+			            <p:commandButton value="Pesquisar" oncomplete="PF('confirmaFun').show()" process="@this" icon="fa fa-fw fa-search"/>
+					</h:panelGrid>
+	
+		            
+		        </h:panelGrid>
+		        
+		        <h:panelGrid style="width: 100%;"> 
+					<p:outputLabel value="Observação"/>
+		            <p:inputTextarea value="#{MBAgendamento.agenda.observacao}" style="width: 95%;"/>
+				</h:panelGrid>   
+		        
+		        <p:commandButton value="Voltar" onclick="PF('eventDialog').hide(); return false;"/>
+		        <p:commandButton id="addButton" value="Save" actionListener="#{MBAgendamento.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+	        </h:form>
+        	
+	        <h:form id="formularioDataTable">
+	        	<p:dataTable value="#{MBAgendamento.listaProntuarios}" var="lista" id="tabelaProntuarios">
+					<f:facet name="header">
+						<h:outputText value="Lista de Prontuários"/>
+					</f:facet>
+					
+					<p:column headerText="Data">
+						<h:outputText value="#{lista.data}">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+						</h:outputText>
+
+					</p:column>
+					
+					<p:column headerText="Estado Mental">
+						<h:outputText value="#{lista.anotMental}"/>
+					</p:column>
+	        		
+	        	</p:dataTable>
+	        </h:form>
+        </h:panelGrid>
+    </p:dialog>    
+    
+    
+    <p:confirmDialog id="confirmaPaciente" widgetVar="confirmaPac">
+			<h:form >
+				<p:dataTable var="item" value="#{MBAgendamento.listaPaciente}"
+					selectionMode="single" selection="#{MBAgendamento.paciente}" rowKey="#{item.id}">
+					
+					 <p:ajax event="rowSelect" listener="#{MBAgendamento.PegaPaciente}" 
+					 	onsuccess="PF('confirmaPac').hide()" update=":formulario:panelPac :formularioDataTable:tabelaProntuarios"/>
+					
+					<p:column headerText="Código">
+						<h:outputText value="#{item.id}"/>
+					</p:column>
+					
+					<p:column headerText="Nome">
+						<h:outputText value="#{item.nome}"/>
+					</p:column>
+					
+					<p:column headerText="CPF">
+						<h:outputText value="#{item.cpf}"/>
+					</p:column>
+					
+					<p:column headerText="RG">
+						<h:outputText value="#{item.rg}"/>
+					</p:column>
+					
+					<p:column headerText="Telefone">
+						<h:outputText value="#{item.contato.telefone}"/>
+					</p:column>
+					
+					<p:column headerText="Cidade">
+						<h:outputText value="#{item.endereco.cidade}"/>
+					</p:column>
+					
+				</p:dataTable>
+			</h:form>
+		</p:confirmDialog>
+		
+		<p:confirmDialog id="confirmaFuncionario" widgetVar="confirmaFun">
+			<h:form >
+				<p:dataTable var="item" value="#{MBAgendamento.listaFuncionario}"
+					selectionMode="single" selection="#{MBAgendamento.funcionario}" rowKey="#{item.id}">
+					
+					 <p:ajax event="rowSelect" listener="#{MBAgendamento.PegaFuncionario}" 
+					 	onsuccess="PF('confirmaFun').hide()" update=":formulario:panelFunc"/>
+					
+					<p:column headerText="Código">
+						<h:outputText value="#{item.id}"/>
+					</p:column>
+					
+					<p:column headerText="Nome">
+						<h:outputText value="#{item.nome}"/>
+					</p:column>
+					
+					<p:column headerText="CPF">
+						<h:outputText value="#{item.cpf}"/>
+					</p:column>
+					
+					<p:column headerText="RG">
+						<h:outputText value="#{item.rg}"/>
+					</p:column>
+					
+					<p:column headerText="Telefone">
+						<h:outputText value="#{item.contato.telefone}"/>
+					</p:column>
+					
+					<p:column headerText="Cidade">
+						<h:outputText value="#{item.endereco.cidade}"/>
+					</p:column>
+					
+				</p:dataTable>
+			</h:form>
+		</p:confirmDialog>
+	</ui:define>
+</ui:composition>
+
+

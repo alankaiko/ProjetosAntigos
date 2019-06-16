@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/WEB-INF/templates/LayoutCadastro.xhtml">
+	
+	<f:metadata>
+		<f:viewAction action="#{consultaProntuario.ListarGeral}"/>
+	</f:metadata>
+	
+	<ui:define name="titulo">Gerenciar Prontuários</ui:define>
+	
+	<ui:define name="corpo">
+		<h:form id="formulario">
+			<div class="layout-content">
+				<div class="conteudo-principal">
+					<div>
+						<p:toolbar style="margin-top: 25px">
+				            <p:toolbarGroup>
+				                <p:button value="Novo" icon="fa fa-fw fa-plus" outcome="/prontuarios/Prontuario"/>
+				                <p:button value="Gerar PDF" icon="fa fa-fw fa-file-pdf-o"/>  
+					        </p:toolbarGroup>
+				            
+				            <p:toolbarGroup align="right">
+					            <p:button value="Pesquisar" icon="fa fa-fw fa-search" outcome="/prontuarios/GerenciarProntuarios"/>
+					        </p:toolbarGroup>
+			   			</p:toolbar>  
+					</div>
+			
+					<p:dataTable value="#{consultaProntuario.listaProntuarios}" var="lista" id="gerencial"
+						style="margin-top: 20px" paginator="true" rows="12">
+						<p:column headerText="Agendamento" style="text-align: center; width: 8%">
+							<h:outputLabel value="#{lista.data}">
+								<f:convertDateTime pattern="dd/MM/yyyy"/>
+							</h:outputLabel>
+						</p:column>
+						
+						<p:column headerText="Hora" style="text-align: center; width: 5%">
+							<h:outputText value="#{lista.hora}"/>
+						</p:column>
+						
+						<p:column headerText="Nome">
+							<h:outputText value="#{lista.paciente.nome}"/>
+						</p:column>
+						
+						<p:column headerText="CPF" style="text-align: center; width: 12%">
+							<h:outputText value="#{lista.paciente.cpf}"/>
+						</p:column>
+						
+						<p:column headerText="Alerta" style="text-align: center; width: 12%">
+							<h:outputText value="#{lista.anotConsciencia}"/>
+						</p:column>
+						
+						<p:column headerText="Estado" style="text-align: center; width: 12%">
+							<h:outputText value="#{lista.anotMental}"/>
+						</p:column>
+						
+						<p:column headerText="Opções" id="colunaExcluir" style="text-align: center; width: 8%">
+							<p:button icon="fa fa-fw fa-edit" title="Editar" outcome="/prontuarios/Prontuario">
+								<f:param name="editaProntuario" value="#{lista.id}"/>
+							</p:button>
+							
+							<p:commandButton oncomplete="PF('confirmaExclusao').show()" process="@this" title="Excluir"
+								icon="fa fa-fw fa-trash" update=":confirmaExclusaoDialog">
+								
+								<f:setPropertyActionListener value="#{lista}" target="#{consultaProntuario.prontuarioSelecionado}"/>
+							</p:commandButton>
+						</p:column>
+						
+					
+					</p:dataTable>
+				</div>
+			</div>
+		</h:form>
+		
+		<p:confirmDialog header="Exclusão de Prontuario" widgetVar="confirmaExclusao" id="confirmaExclusaoDialog"
+			message="Tem certeza que deseja excluir o Paciente #{consultaProntuario.prontuarioSelecionado.paciente.nome}">
+			<h:form style="text-align: center;">
+				<p:button value="Não" onclick="PF('confirmaExclusao').hide(); return false;"/>
+				
+				<p:commandButton value="Sim" oncomplete="PF('confirmaExclusao').hide();"
+					action="#{MBProntuario.Excluir}" actionListener="#{consultaProntuario.Redirecionar}" process="@this" ajax="false"/>
+			</h:form>
+		</p:confirmDialog>
+		
+	</ui:define>
+	
+</ui:composition>

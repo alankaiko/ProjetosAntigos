@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<ui:composition>
+		<h:form id="formTeste">			
+			<div class="topbar">
+				<div id="menuEsquerda" style="float: left;">	
+					<a id="menu-button">
+						<span class="fa fa-fw fa-angle-left"></span>
+					</a>
+				</div>
+				
+				<div id="menuTitulo">
+					<a href="/GASWeb/Home.xhtml">
+						<span>Gestão Hospitalar</span>
+					</a>
+					
+				</div>
+				
+				<div id="menuDireita" style="float: right;">
+					<p:menubar>
+						<p:submenu label="Arquivo">
+							<p:menuitem value="Agenda Clínica" outcome="/agendas/GerenciarAgendas"/>
+							<p:menuitem value="Consulta Atendimento"/>
+							<p:menuitem value="Acomodações"/>
+						</p:submenu>
+						
+						
+						
+						<p:submenu label="Atendimento">
+							<p:menuitem value="Gerenciar Prontuários" outcome="/prontuarios/GerenciarProntuarios"/>
+							<p:menuitem value="Incluir Pacientes" outcome="/pacientes/Paciente"/>
+							<p:menuitem value="Gerenciar Evolução" outcome="/evolucoes/GerenciarEvolucoes"/>
+						</p:submenu>
+						
+						<p:submenu label="Cadastro">
+							<p:menuitem value="Gerenciar Convênios" outcome="/convenios/GerenciarConvenios"/>
+							<p:menuitem value="Gerenciar Clínicas"/>
+							<p:menuitem value="Gerenciar Pacientes" outcome="/pacientes/GerenciarPacientes"/>
+						</p:submenu>
+						
+						<p:submenu label="Usuários">
+							<p:menuitem value="Cadastro de Funcionários" outcome="/funcionarios/Funcionario"/>
+							<p:menuitem value="Gerenciar Funcionários" outcome="/funcionarios/GerenciarFuncionarios"/>
+							<p:menuitem value="Gerenciar Usuários" outcome="/usuarios/GerenciarUsuarios"/>
+							<p:menuitem value="Cargos Funcionário" outcome="/cargos/GerenciarCargos"/>
+						</p:submenu>
+						
+						<p:submenu label="Farmácia">
+							<p:menuitem value="Cadastro de Fabricantes" outcome="/fabricantes/GerenciarFabricantes"/>
+							<p:menuitem value="Grupo de Produtos"/>
+							<p:menuitem value="Cadastro de Produtos" outcome="/produtos/GerenciarProdutos"/>
+							<p:menuitem value="Motivo de devoluções"/>
+						</p:submenu>
+						
+						<p:submenu label="Relatórios">
+							<p:menuitem value="Relatório de Itens"/>
+							<p:menuitem value="Relatório de Convênios"/>
+							<p:menuitem value="Relatório de Fornecedores"/>
+							<p:menuitem value="Relatório de Grupo de Itens"/>
+							<p:menuitem value="Relatório de Pacientes"/>
+							<p:menuitem value="Relatório de Funcionários"/>
+							<p:menuitem value="Relatório de Clínicas"/>
+							<p:menuitem value="Relatório de Prontuários"/>
+						</p:submenu>
+						
+						<p:menuitem value="Sair" url="/logout" />
+					</p:menubar>
+				</div>
+			</div>
+		</h:form>
+	</ui:composition>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

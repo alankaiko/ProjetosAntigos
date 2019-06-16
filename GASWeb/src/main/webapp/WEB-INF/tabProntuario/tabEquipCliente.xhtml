@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+	<h4>Nível de Consciência</h4>
+	
+	<h:panelGrid columns="8" style="width: 80%;">
+		<p:selectBooleanCheckbox itemLabel="Catéter" value="#{MBCadProntuario.prontuario.equipCheckbox.checkCateter}"/>
+		
+		<p:selectBooleanCheckbox itemLabel="Sonda" value="#{MBCadProntuario.prontuario.equipCheckbox.checkSonda}"/>
+
+		<p:selectBooleanCheckbox itemLabel="Uripen" value="#{MBCadProntuario.prontuario.equipCheckbox.checkUripen}"/>
+
+		<p:selectBooleanCheckbox itemLabel="Dreno" value="#{MBCadProntuario.prontuario.equipCheckbox.checkDreno}"/>
+
+		<p:selectBooleanCheckbox itemLabel="Curativos" value="#{MBCadProntuario.prontuario.equipCheckbox.checkCurativos}"/>
+
+		<p:selectBooleanCheckbox itemLabel="Venóclise" value="#{MBCadProntuario.prontuario.equipCheckbox.checkVenoclise}"/>
+
+		<p:selectBooleanCheckbox itemLabel="Outros" value="#{MBCadProntuario.prontuario.equipCheckbox.checkOutros}"/>
+	</h:panelGrid>
+	
+	<div id="divisoriaTab">
+		<div>
+			<p:outputLabel class="labelTab" value="Informações sobre aparelhos  que o paciente utiliza"/>
+		</div>
+		
+		<div>
+			<p:inputTextarea class="textoArea" value="#{MBCadProntuario.prontuario.equipObservacao}"/>
+		</div>
+	</div>	
+
+</ui:composition>

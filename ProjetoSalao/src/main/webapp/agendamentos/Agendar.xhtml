@@ -1,0 +1,108 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/template/LayoutPadrao.xhtml">
+
+	
+	<ui:define name="titulo">Agendar</ui:define>
+	
+	<ui:define name="corpo">
+		<h:form>
+			<h:panelGrid>
+		        <h3 style="margin-top: 0">Agenda</h3>
+		        
+		        <p:schedule id="schedule" timeFormat="HH:mm" timeZone="GMT-3" axisFormat="HH:mm" value="#{MBAgenda.eventModel}" widgetVar="myschedule">
+	 
+		            <p:ajax event="dateSelect" listener="#{MBAgenda.onDateSelect}" oncomplete="PF('eventoAgendamento').show();"/>
+		            <p:ajax	event="eventSelect" listener="#{MBAgenda.onEventSelect}" oncomplete="PF('eventoAgendamento').show();"/>
+		            <p:ajax event="eventMove" listener="#{MBAgenda.onEventMove}"/>
+	       		</p:schedule>
+	    	</h:panelGrid>
+		</h:form>
+		
+		<p:dialog id="eventoAg" modal="true" widgetVar="eventoAgendamento" style="margin-top: -120px;height: auto;" closeOnEscape="true">
+			<h:form id="formRegs" style="width: 100%;height: auto;">
+				<h:panelGrid id="salars" columns="2" style="width: 100%;height: auto;">
+					<p:outputLabel value="Salão"/>
+					<h:panelGroup>
+						<p:inputText value="#{MBAgenda.reserva.salao.nomeSalao}"/>
+						<p:commandLink style="margin-right: 5px; text-decoration: underline;" value="Procurar" onclick="PF('sala').show()"/>
+					</h:panelGroup>
+				</h:panelGrid>
+				
+				<h:panelGrid id="paci" columns="2" style="width: 100%;height: auto;">						
+					<p:outputLabel value="Data"/>
+					<p:calendar value="#{MBAgenda.data}" timeZone="GMT+2" pattern="dd/MM/yyyy"/>
+					
+					<p:outputLabel value="Hora de Início"/>
+					<p:selectOneMenu value="#{MBAgenda.reserva.horaInicial}">
+						<f:selectItems value="#{MBAgenda.horasLista}"/>
+					</p:selectOneMenu>
+					
+					<p:outputLabel value="Hora do Término"/>
+					<p:selectOneMenu value="#{MBAgenda.reserva.horaFinal}">
+						<f:selectItems value="#{MBAgenda.horasLista}"/>
+					</p:selectOneMenu>
+					
+					<p:outputLabel value="Núm. Apartamento"/>
+					<p:inputText value="#{MBAgenda.reserva.apartamento.numeroApartamento}" readonly="true"/>
+					
+					<p:outputLabel value="Cliente Resp."/>
+					<p:inputText value="#{MBAgenda.reserva.apartamento.cliente.nome}" readonly="true"/>
+					
+					<p:outputLabel/>
+					<p:commandLink value="Pesquisar Apartamento"  onclick="PF('aparta').show()"/>
+				</h:panelGrid>	
+				
+				<h:panelGrid>
+					<p:button value="Sair" oncomplete="PF('eventoAgendamento').hide();"/>
+					<p:commandButton value="Agendar" action="#{MBAgenda.ReservarSalao}"/>
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+		
+		<p:dialog id="apartamentos" widgetVar="aparta" closeOnEscape="true" modal="true">
+			<h:form >
+				<p:dataTable var="item" value="#{MBAgenda.listaApartamentos}" paginator="true" rows="7"
+					selectionMode="single" selection="#{MBAgenda.apartamento}" rowKey="#{item.id}">
+					
+					 <p:ajax event="rowSelect" listener="#{MBAgenda.PegaApartamento}" 
+					 	onsuccess="PF('aparta').hide()" update=":formRegs:paci" process="@this"/>
+					
+					<p:column headerText="Número do apartamento">
+						<h:outputText value="#{item.numeroApartamento}"/>
+					</p:column>
+					
+					<p:column headerText="Nome Cliente">
+						<h:outputText value="#{item.cliente.nome}"/>
+					</p:column>
+					
+					<p:column headerText="CPF">
+						<h:outputText value="#{item.cliente.cpf}"/>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</p:dialog>
+		
+		<p:dialog id="salaos" widgetVar="sala" closeOnEscape="true" modal="true">
+			<h:form >
+				<p:dataTable var="item" value="#{MBAgenda.listaSaloes}" paginator="true" rows="7"
+					selectionMode="single" selection="#{MBAgenda.salao}" rowKey="#{item.id}">
+					
+					 <p:ajax event="rowSelect" listener="#{MBAgenda.PegaSalao}" 
+					 	onsuccess="PF('sala').hide()" update=":formRegs:salars" process="@this"/>
+					
+					<p:column headerText="Descrição">
+						<h:outputText value="#{item.nomeSalao}"/>
+					</p:column>
+					
+					<p:column headerText="Nome Bloco">
+						<h:outputText value="#{item.bloco}"/>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</p:dialog>
+	</ui:define>	
+</ui:composition>

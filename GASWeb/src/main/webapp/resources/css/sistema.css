@@ -1,0 +1,664 @@
+@charset "utf-8";
+
+@-webkit-keyframes fadeInDown {
+	from { 
+		opacity:0;
+		-webkit-transform: translate3d(0, -20px, 0);
+		transform: translate3d(0, -20px, 0);
+	}
+
+	to {
+		opacity: 1;
+		-webkit-transform: none;
+		transform: none;
+	}
+
+}
+
+@keyframes fadeInDown {
+	from { 
+		opacity:0;
+		transform: translate3d(0, -20px, 0);
+	}
+
+	to {
+		opacity: 1;
+		transform: none;
+	}
+
+}
+
+@-webkit-keyframes fadeOutUp {
+	from {
+		opacity:1;
+	
+	}
+
+	to {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -20px, 0);
+		transform: translate3d(0, -20px, 0);
+	}
+
+}
+
+@keyframes fadeOutUp {
+	from { 
+		opacity:1;
+	
+	}
+	
+	to {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -20px, 0);
+		transform: translate3d(0, -20px, 0);
+	}
+
+}
+
+/*------------------------configuracao geral de paginas------------------------*/
+.clearfix:after {
+	content: " ";
+	display: block;
+	clear: both;
+}
+
+html {
+	background-color: #f4f4f4;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+body {
+	font-family: 'Source Sans Pro', 'Helvetica Neue', sans-serif;
+	font-size: 13px;
+	color: #777777;
+	-webkit-font-smoothing: antialiased;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+body a{
+	text-decoration: none;
+}
+
+.layout-wrapper {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+}
+
+h3 {
+	font-size: 22px;
+	line-height: 1em;
+	line-height: 70px;
+	font-weight: 400;
+	padding: 0 20px;
+	margin: 0;
+}
+
+#conteudo {
+	width: 78%;
+	float: right;
+	padding: 5px;
+	padding-top: 30px;
+}
+
+#conteudo.ativandocont {
+	width: 90%;
+}
+
+body a {
+	cursor: pointer;
+}
+
+/*------------------------barra topo menu------------------------*/
+#menuInicial {
+	width: 100%;
+	height: 60px;
+	top: 0px;
+	margin: 0 auto;
+	position: fixed;
+	z-index: 1000;
+}
+
+#menuInicial .topbar {
+	width: 100%;
+	height: 60px;
+	outline: 0 none;
+	box-sizing: border-box;
+	background: #ffffff;
+	-webkit-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+	-moz-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+	box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+	z-index: 1000;
+}
+
+.ui-menu {
+	border: none;
+}
+
+#menuInicial .topbar #menuTitulo span {
+	float: left;
+	position: relative;
+	font-size: 22px;
+	font-weight: 700;
+	padding: 15px;
+}
+
+#menuInicial .topbar #menuTitulo a {
+	text-decoration: none;
+	color: #777777;
+}
+
+#menuInicial .topbar #menuEsquerda #menu-button {
+	text-align: center;
+	width: 59px;
+	height: 60px;
+	line-height: 60px;
+	border-right: solid 1px #e0e0e0;
+	color: #777777;
+	float: left;
+}
+
+#menuInicial .topbar #menuEsquerda #menu-button:hover {
+	background-color: #f5f5f5;
+	color: #494949;
+}
+
+#menuInicial .topbar #menuEsquerda #menu-button span {
+	font-size: 36px;
+	line-height: inherit;
+	transition: all .3s;
+	-webkit-transform: rotate(-180deg);
+	-moz-transform: rotate(-180deg);
+	-o-transform: rotate(-180deg);
+	-ms-transform: rotate(-180deg);
+	transform: rotate(-180deg);
+}
+
+.layout-wrapper.layout-wrapper-menu-active #menu-button span {
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	-ms-transform: rotate(0deg);
+	transform: rotate(0deg);
+}
+
+/*------------------------menu estatico lateral esquerdo------------------------*/
+#painelEsquerdo {
+	position: absolute;
+	width: 20.5%;
+	float: left;
+}
+
+.layout-wrapper #painelEsquerdo .layout-sidebar {
+	position: fixed;
+	top: 60px;
+	height: 100%;
+	width: 60px;
+	background-color: #2C2C2C;
+	z-index: 100;
+	-moz-transition: width 0.3s;
+	-o-transition: width 0.3s;
+	-webkit-transition: width 0.3s;
+	transition: width 0.3s;
+	overflow: hidden;
+}
+
+#layout-menu {
+	padding: 0;
+	margin: 0;
+	text-align: center;
+	display: block;
+}
+
+#layout-aberto .menuopcao {
+	display: none;
+}
+
+#layout-aberto .menuopcao.active-menuitem {
+	display: block;
+}
+
+#layout-menu li {
+	list-style-type: none;
+	text-align: center;
+	box-sizing: border-box;
+}
+
+#layout-menu>li>a {
+	height: 60px;
+	width: 100%;
+	box-sizing: border-box;
+	display: block;
+}
+
+#layout-menu li a .icone {
+	line-height: 60px;
+	font-size: 22px;
+	color: #ffffff;
+	-moz-transition: color 0.3s;
+	-o-transition: color 0.3s;
+	-webkit-transition: color 0.3s;
+	transition: color 0.3s;
+}
+
+#layout-menu li a .icone:hover {
+	color: #ff88c7;
+}
+
+#layout-menu li:hover {
+	background-color: #1f1f1f;
+}
+
+#layout-menu li.active-item {
+	background-color: #1f1f1f;
+}
+
+#layout-aberto .menuopcao.ativando-lista {
+	display: block;
+}
+
+#layout-aberto {
+	position: absolute;
+	width: 200px;
+	left: 60px;
+	top: 0;
+	height: 100%;
+	background-color: #1f1f1f;
+	-webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
+	-moz-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
+	-moz-transition: margin-left 0.3s;
+	-o-transition: margin-left 0.3s;
+	-webkit-transition: margin-left 0.3s;
+	transition: margin-left 0.3s;
+}
+
+#layout-aberto ul li a {
+	display: block;
+	padding: 6px;
+	border-radius: 2px;
+	text-decoration: none;
+	-moz-transition: background-color 0.3s;
+	-o-transition: background-color 0.3s;
+	-webkit-transition: background-color 0.3s;
+	transition: background-color 0.3s;
+	color: #c4c4c4;
+}
+
+#layout-aberto ul {
+	list-style-type: none;
+	padding: 12px 0;
+}
+
+#layout-aberto ul li:hover {
+	background-color: #6a6a6a;
+	color: #ffffff;
+}
+
+#layout-aberto ul li i {
+	font-size: 150%;
+}
+
+#layout-aberto ul li span {
+	font-size: 90%;
+}
+
+/*------------------------corpo da pagina conteudo da pagina paciente----------------------*/
+.layout-wrapper .divisao-conteudo {
+	margin-top: 60px;
+}
+
+#painelCadastro {
+	width: 80%;
+	display: block;
+	padding: 10px;
+	padding-top: 30px;
+	margin: 0 auto;
+	background-color: #ffffff;
+	-webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0
+		rgba(0, 0, 0, 0.12), 0 0 2px 0 rgba(0, 0, 0, 0.14);
+	-moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0
+		rgba(0, 0, 0, 0.12), 0 0 2px 0 rgba(0, 0, 0, 0.14);
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0
+		rgba(0, 0, 0, 0.12), 0 0 2px 0 rgba(0, 0, 0, 0.14);
+}
+
+#painelCadastro>div {
+	margin: 0 auto;
+	font-family: "Open Sans", "Custom Helvetica Neue", "Proxima Nova",
+		"Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #676d76;
+	background-color: #fff;
+}
+
+#painelCadastro>div .campo {
+	padding-top: 6px;
+	text-align: right;
+	margin-bottom: 0;
+	padding-left: 100px;
+	padding-right: 5px;
+	font-size: 14px !important;
+	color: #898E95;
+}
+
+#painelCadastro .dadospessoais {
+	padding: .5em 1em .3em;
+	display: block;
+	border: 1px solid #d9d9d9;
+	color: #1b1d1f;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	background: #f6f7f9 url("") 0 0 repeat-x;
+	background: -moz-linear-gradient(top, #f6f7f9 0%, #ebedf0 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f6f7f9),
+		color-stop(100%, #ebedf0));
+	background: -webkit-linear-gradient(top, #f6f7f9 0%, #ebedf0 100%);
+	background: -o-linear-gradient(top, #f6f7f9 0%, #ebedf0 100%);
+	background: -ms-linear-gradient(top, #f6f7f9 0%, #ebedf0 100%);
+	background: linear-gradient(top, #f6f7f9 0%, #ebedf0 100%);
+}
+
+#painelCadastro .campos {
+	width: 99.5%;
+	margin-bottom: 15px;
+}
+
+#painelCadastro .campos .textoCampo {
+	width: 30%;
+	float: left;
+	height: 19px;
+}
+
+#painelCadastro .campos .campoDireito {
+	width: 30%;
+	float: right;
+}
+
+#painelCadastro .campos .comboEsquerda {
+	width: 20%;
+	float: left;
+	height: 19px;
+}
+
+#painelCadastro .campos .comboDireita {
+	width: 20%;
+	float: right;
+}
+
+#painelCadastro .campos .textoMaior {
+	width: 98%;
+}
+
+#painelCadastro .campos .campoFiliacao {
+	width: 48%;
+}
+
+#painelCadastro .rotuloDiv {
+	width: 99.5%;
+	display: inline-flex;
+	margin-top: 15px;
+}
+
+#painelCadastro .rotuloDiv .rotulo {
+	text-align: left;
+	width: 50%;
+	font-weight: bold;
+}
+
+#painelCadastro .rotuloDiv .rotuloDireito {
+	text-align: right;
+	width: 50%;
+	font-weight: bold;
+}
+
+/*------------------------corpo da pagina conteudo da pagina paciente----------------------*/
+#painelCadastro .divisoria-baixa {
+	position: absolute;
+	bottom: 0;
+	height: 60px;
+	width: 100%;
+	background-color: #f9f9f9;
+	border-width: 0;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #ddd;
+	-webkit-border-radius: 0;
+}
+
+#painelCadastro .rotuloDivMini {
+	width: 70%;
+	display: inline-flex;
+	margin-top: 15px;
+	padding-left: 30px;
+}
+
+#painelCadastro .rotuloDivMini .textoMaior {
+	width: 98%;
+	margin: 0;
+	outline: medium none;
+	padding: 4px;
+	font-weight: normal;
+	background: #ffffff;
+	border-bottom-right-radius: 4px;
+	border-bottom-left-radius: 4px;
+	border-top-right-radius: 4px;
+	border-top-left-radius: 4px;
+	-moz-box-shadow: inset 0 2px 2px #8f8f8f;
+	-webkit-box-shadow: inset 0 2px 2px #8f8f8f;
+	box-shadow: inset 0 2px 2px #8f8f8f;
+	color: #222222;
+}
+
+#painelCadastro .rotuloDivMini .rotuloM {
+	width: 40%;
+	margin: 0;
+	outline: medium none;
+	padding: 4px;
+	font-weight: normal;
+	background: #ffffff;
+	border-bottom-right-radius: 4px;
+	border-bottom-left-radius: 4px;
+	border-top-right-radius: 4px;
+	border-top-left-radius: 4px;
+	-moz-box-shadow: inset 0 2px 2px #8f8f8f;
+	-webkit-box-shadow: inset 0 2px 2px #8f8f8f;
+	box-shadow: inset 0 2px 2px #8f8f8f;
+	color: #222222;
+}
+
+#confirmaFuncionario, #confirmaPaciente {
+	width: 80% !important;
+	left: auto !important;
+}
+
+/*------------------------corpo da pagina conteudo da pagina de prontuario----------------------*/
+#painelCadastro h4 {
+	display: inline-block;
+}
+
+#divisoriaTab {
+	margin-top: 25px;
+}
+
+#divisoriaTab .rotulosTab {
+	display: inline-flex;
+	position: relative;
+	width: 100%;
+	margin-bottom: 4px;
+}
+
+#divisoriaTab .rotulosTab .labelTab {
+	margin-right: 15px;
+	width: 30%;
+}
+
+#divisoriaTab .camposTab {
+	margin-bottom: 20px;
+	display: inline-flex;
+	position: relative;
+	width: 100%;
+}
+
+#divisoriaTab .rotulosTab>div {
+	width: 33%;
+}
+
+#divisoriaTab .camposTab>div {
+	width: 33%;
+}
+
+#divisoriaTab .camposTab>div .codTab {
+	width: 20%;
+}
+
+#divisoriaTab .campos .textoMaiorTab {
+	width: 70%;
+}
+
+#divisoriaTab .camposTab>div {
+	width: 33%;
+}
+
+div .campos .textoMaiorTab {
+	width: 70%;
+}
+
+#divisoriaTab .labelTab {
+	margin-right: 15px;
+	width: 30%;
+}
+
+#divisoriaTab .textoArea {
+	width: 80%;
+}
+
+.colunaEsquerda {
+	width: 25%;
+}
+
+.colunaDireita {
+	width: 75%;
+}
+
+
+/*----------------------------------corpo do dialog de agendamento-------------------------------------*/
+#eventos{
+	width: 45% !important;
+}
+
+#painelGridPai{
+	width: 100%;
+}
+
+#painelGridPai #formulario{
+	width: 100%;
+}
+
+#painelGridPai #formulario .colunaClasses{
+	width: 30%;
+}
+
+#painelGridPai #formulario .campoGroup{
+	width: 100%;
+}
+
+#painelGridPai #formulario .colunaProcura{
+	width: 10%;
+}
+
+#painelGridPai #formulario .colunaProcuraTexto{
+	width: 70%;
+}
+
+#painelGridPai #formulario .colunaProcuraCampos{
+	width: 40%;
+}
+
+#painelGridPai #formulario .colunaProcuraTexto .ui-inputtext{
+	width: 90%;
+}
+
+#painelGridPai #formulario .colunaProcuraCampos .ui-inputtext{
+	width: 90%;
+}
+
+#painelGridPai #formulario .colunaFiliacao{
+	width: 2%;
+}
+
+/*--------------------------configuracao dos botoes da pagina de agendamento adicionar----------------------*/
+#botaoCadastro{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#botaoCadastro .ui-button {
+	width: 50px;
+	height: 50px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	box-shadow: 0 2px 2px 0px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 0 2px 2px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 0 2px 2px 0px rgba(0, 0, 0, 0.3);
+	margin: 5px;
+}
+
+#botaoCadastro .ui-button .ui-icon {
+	position: relative;
+	top: 0;
+	margin-top: 0;
+	margin: 0 auto;
+	padding: 0 0 0 0;
+	left: 0;
+}
+
+#botaoCadastro .ui-button .ui-icon-text {
+	margin: 0 auto;
+	display: none;
+}
+
+#botaoCadastro .ui-button .ui-button-text {
+	padding: 0 0 0 0;
+}
+
+.ui-dialog-buttonpane {
+	text-align: center !important;
+}
+
+#painelGridPai #formulario .painelGrupoBotao{
+	height: 60px;
+	display: -moz-inline-box;
+	width: 100%;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

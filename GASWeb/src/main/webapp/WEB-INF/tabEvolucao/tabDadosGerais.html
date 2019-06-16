@@ -1,0 +1,85 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+	<div id="divisoriaTab">
+		<div class="rotulosTab">
+			<div>
+				<p:outputLabel value="Tempo de Internação"/>
+			</div>
+			
+			<div>
+				<p:outputLabel value="Data Inclusão"/>
+			</div>
+		</div>
+		
+		<div class="camposTab">
+			<div>
+				<p:inputText value="#{MBCadEvolucao.evolucao.tempoInternacao}"/>
+			</div>
+			
+			<div>
+				<p:calendar value="#{MBCadEvolucao.evolucao.data}" readonly="true" showOn="false"/>
+			</div>
+		</div>
+		
+		<div>
+			<p:outputLabel value="Código"/>
+		</div>
+		
+		<div>
+			<p:inputText value="#{MBCadEvolucao.evolucao.paciente.id}"/>
+		</div>
+		
+		<div class="rotuloDiv">
+			<p:outputLabel class="rotulo" value="Nome"/>
+		</div>
+		
+		<div class="campos">								
+			<p:inputText class="textoMaiorTab" value="#{MBCadEvolucao.evolucao.paciente.nome}"/>
+		</div>
+				
+	</div>
+	
+	<p:separator/>
+	
+	<h4>Registrado Por</h4>
+	
+	<div>
+		<div class="rotulosTab">
+			<div>
+				<p:outputLabel class="labelTab" value="Código"/>
+			</div>
+		</div>
+		
+		<div class="camposTab">
+			<div>
+				<p:inputText value="#{MBCadEvolucao.evolucao.funcionario.id}" readonly="true"/>
+			</div>
+		</div>
+		
+		<div class="rotulosTab">
+			<div>
+				<p:outputLabel value="Nome"/>
+			</div>
+		</div>
+		
+		<div class="campos">
+			<p:inputText class="textoMaiorTab" value="#{MBCadEvolucao.evolucao.funcionario.nome}"/>
+		</div>
+	
+		
+		<div class="campos">
+		
+			<p:outputLabel value="Registro"/>
+			<h:panelGroup>
+				<p:inputText style="margin-right: 10px; width: 8%;" value="#{MBCadEvolucao.evolucao.funcionario.registroCoren.inscricao}" readonly="true"/>
+				<p:inputText style="margin-right: 10px; width: 15%;" value="#{MBCadEvolucao.evolucao.funcionario.registroCoren.coren}" readonly="true"/>
+				<p:inputText style="margin-right: 10px; width: 7%" value="#{MBCadEvolucao.evolucao.funcionario.registroCoren.uf}" readonly="true"/>
+			</h:panelGroup>
+		</div>		
+	</div>	
+	
+</ui:composition>

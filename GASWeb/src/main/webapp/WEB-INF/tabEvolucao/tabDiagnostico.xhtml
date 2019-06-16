@@ -1,0 +1,66 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+	
+	<h:panelGrid columns="5" style="width: 90%;">
+		<p:selectBooleanCheckbox itemLabel="Sepse abdominal" value="#{MBCadEvolucao.evolucao.diagnosticoCheck.sepseCheckbox}"/>
+		
+		<p:selectBooleanCheckbox itemLabel="Foco pulmonar" value="#{MBCadEvolucao.evolucao.diagnosticoCheck.pulmonarCheckbox}"/>
+		
+		<p:selectBooleanCheckbox itemLabel="Distensão abdominal" value="#{MBCadEvolucao.evolucao.diagnosticoCheck.distensaoCheckbox}"/>
+		
+		<p:selectBooleanCheckbox itemLabel="Colite pseudomembranosa" value="#{MBCadEvolucao.evolucao.diagnosticoCheck.coliteCheckbox}"/>
+		
+		<p:selectBooleanCheckbox itemLabel="Outros" value="#{MBCadEvolucao.evolucao.diagnosticoCheck.outrosCheckbox}"/>
+	</h:panelGrid>
+	
+	<div id="divisoriaTab">
+		<div>
+			<p:inputTextarea class="textoArea" value="#{MBCadEvolucao.evolucao.textoObservacao}"/>
+		</div>
+	</div>	
+	
+	<p:separator/>
+	
+	<h4>Disgnóstico associado</h4>
+	
+	<div id="divisoriaTab">
+		<div>
+			<p:inputTextarea class="textoArea" value="#{MBCadEvolucao.evolucao.textoDiagAssoc}"/>
+		</div>
+	</div>	
+	
+	<p:separator/>
+	
+	<h4>Intercorrências</h4>
+	
+	<div id="divisoriaTab">
+		<div>
+			<p:inputTextarea class="textoArea" value="#{MBCadEvolucao.evolucao.textoIntercorrencias}"/>
+		</div>
+	</div>	
+	
+	<p:separator/>
+	
+	<h4>Exames Principais</h4>
+	
+	<div id="divisoriaTab">
+		<div>
+			<p:inputTextarea class="textoArea" value="#{MBCadEvolucao.evolucao.textoExames}"/>
+		</div>
+	</div>	
+	
+	<p:separator/>
+	
+	<h4>Evolução</h4>
+	
+	<div id="divisoriaTab">
+		<div>
+			<p:inputTextarea class="textoArea" value="#{MBCadEvolucao.evolucao.textoEvolucao}"/>
+		</div>
+	</div>	
+	
+</ui:composition>

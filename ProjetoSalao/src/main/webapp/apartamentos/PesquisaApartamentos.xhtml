@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/template/LayoutPadrao.xhtml">
+	
+	<f:metadata>
+		<f:viewAction action="#{pesquisaApartamento.CarregarLista}"/>
+	</f:metadata>
+	
+	<ui:define name="titulo">Pesquisar Apartamentos</ui:define>
+	
+	<ui:define name="corpo">
+		<h:form>
+			<div style="margin: 20px;">
+				<p:messages autoUpdate="true"/>
+				
+				<div>
+					<p:toolbar>
+			            <p:toolbarGroup>
+			                <p:button value="Novo" icon="fa fa-fw fa-plus" outcome="/apartamentos/CadastroApartamento"/>
+				        </p:toolbarGroup>
+			            
+			            <p:toolbarGroup align="right">
+				            <p:button value="Pesquisar" icon="fa fa-fw fa-search" outcome="/apartamentos/PesquisaApartamentos"/>
+				        </p:toolbarGroup>
+		   			</p:toolbar>  
+				</div>
+			
+						
+				<p:dataTable value="#{pesquisaApartamento.listarApartamentos}" var="lista" rows="8" paginator="true">
+					<p:column headerText="Número">
+						<p:outputLabel value="#{lista.id}"/>
+					</p:column>
+					
+					<p:column headerText="Número Ap.">
+						<p:outputLabel value="#{lista.numeroApartamento}"/>
+					</p:column>
+	
+					<p:column headerText="Número Andar">
+						<p:outputLabel value="#{lista.numeroAndar}"/>
+					</p:column>
+					
+					<p:column headerText="Proprietário">
+						<p:outputLabel value="#{lista.cliente.nome}"/>
+					</p:column>
+					
+					<p:column headerText="Cpf">
+						<p:outputLabel value="#{lista.cliente.cpf}"/>
+					</p:column>
+					
+					<p:column>
+						<p:button icon="fa fa-fw fa-edit" title="Editar" outcome="/apartamentos/CadastroApartamento">
+							<f:param name="editaAp" value="#{lista.id}"/>
+						</p:button>
+							
+						<p:commandButton oncomplete="PF('confirmaExclusao').show()" process="@this" title="Excluir"
+								icon="fa fa-fw fa-trash" update=":confirmaExclusaoDialog">
+								
+								<f:setPropertyActionListener value="#{lista}" target="#{pesquisaApartamento.apartamento}"/>
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+			</div>
+		</h:form>
+		
+		<p:confirmDialog header="Exclusão de Apartamento" widgetVar="confirmaExclusao" id="confirmaExclusaoDialog"
+			ssage="Tem certeza que deseja excluir?" closeOnEscape="true">
+			<h:form>
+				<p:button value="Não" onclick="PF('confirmaExclusao').hide(); return false;"/>
+			
+				<p:commandButton value="Sim" oncomplete="PF('confirmaExclusao').hide();"
+				action="#{pesquisaApartamento.Excluir}" actionListener="#{pesquisaApartamento.Redirecionar}" process="@this" ajax="false"/>
+			</h:form>
+		</p:confirmDialog>
+</ui:define>	
+</ui:composition>

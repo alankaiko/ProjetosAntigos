@@ -1,0 +1,21 @@
+
+body{
+	background-color: #f4f4f4;
+}
+
+#formulario{
+	width: 100%;
+}
+
+#formulario table{
+	width: 50%;
+	margin:0 auto;
+	margin-top: 15px;
+	box-sizing: border-box;
+	border: 1px solid #d1d2d8;
+	background: #ffffff;
+	-webkit-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+	-moz-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+	box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+}
+

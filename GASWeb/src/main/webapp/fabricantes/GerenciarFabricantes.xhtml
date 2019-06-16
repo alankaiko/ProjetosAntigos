@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/WEB-INF/templates/LayoutCadastro.xhtml">
+	
+	<f:metadata>
+		<f:viewAction action="#{MBFabricante.ListarGeral}"/>
+	</f:metadata>
+	
+	<ui:define name="titulo">Gerenciar Fabricantes</ui:define>
+	
+	<ui:define name="corpo">
+		<h:form id="formulario">
+			<div class="layout-content">
+				<div class="conteudo-principal">
+					<div>
+						<p:toolbar style="margin-top: 25px">
+				            <p:toolbarGroup>
+				                <p:button value="Novo" icon="fa fa-fw fa-plus" outcome="/fabricantes/Fabricante"/>
+					        </p:toolbarGroup>
+				            
+				            <p:toolbarGroup align="right">
+					            <p:button value="Pesquisar" icon="fa fa-fw fa-search" outcome="/fabricantes/GerenciarFabricantes"/>
+					        </p:toolbarGroup>
+			   			</p:toolbar>  
+					</div>
+			
+					<p:dataTable value="#{MBFabricante.listaFabricante}" var="lista" id="gerencial"
+						 style="margin-top: 20px" paginator="true" rows="12">
+						<p:column headerText="Código" style="text-align: center; width: 10%">
+							<h:outputText value="#{lista.id}"/>
+						</p:column>
+						
+						<p:column headerText="Fabricante">
+							<h:outputText value="#{lista.descricao}"/>
+						</p:column>
+						
+						<p:column headerText="Opções" id="colunaExcluir" style="text-align: center; width: 8%">
+							<p:button icon="fa fa-fw fa-edit" title="Editar" outcome="/fabricantes/Fabricante">
+								<f:param name="editaFabricante" value="#{lista.id}"/>
+							</p:button>
+							
+							<p:commandButton oncomplete="PF('confirmaExclusao').show()" process="@this" title="Excluir"
+								icon="fa fa-fw fa-trash" update=":confirmaExclusaoDialog">
+								
+								<f:setPropertyActionListener value="#{lista}" target="#{MBFabricante.fabricanteSelecionado}"/>
+							</p:commandButton>
+						</p:column>
+						
+					
+					</p:dataTable>
+				</div>
+			</div>
+		</h:form>
+		
+		<p:confirmDialog header="Exclusão de Fabricantes" widgetVar="confirmaExclusao" id="confirmaExclusaoDialog"
+			message="Tem certeza que deseja excluir o fabricante #{MBFabricante.fabricanteSelecionado.descricao}?">
+			<h:form>
+				<p:button value="Não" onclick="PF('confirmaExclusao').hide(); return false;"/>
+				
+				<p:commandButton value="Sim" oncomplete="PF('confirmaExclusao').hide();"
+					action="#{MBFabricante.Excluir}" actionListener="#{MBFabricante.Redirecionar}" process="@this" ajax="false"/>
+			</h:form>
+		</p:confirmDialog>
+	</ui:define>
+	
+</ui:composition>

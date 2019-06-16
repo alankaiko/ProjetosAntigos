@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+	<h4>Nível de Consciência</h4>
+	
+	<div id="divisoriaTab">
+		<p:selectOneRadio style="width: 87%;" value="#{MBCadProntuario.prontuario.anotConsciencia}">
+			<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+			<f:selectItem itemLabel="Alerta" itemValue="Alerta"/>
+			<f:selectItem itemLabel="Letárgico" itemValue="Letárgico"/>
+			<f:selectItem itemLabel="Obnubilado" itemValue="Obnubilado"/>
+			<f:selectItem itemLabel="Torporoso" itemValue="Torporoso"/>
+			<f:selectItem itemLabel="Comatoso" itemValue="Comatoso"/>
+			<f:selectItem itemLabel="Outros" itemValue="Outros"/>
+		</p:selectOneRadio>
+	</div>
+	
+	<p:separator/>
+	
+	<div id="divisoriaTab">
+		<p:selectOneRadio style="width: 87%;" class="selectRadio" value="#{MBCadProntuario.prontuario.anotMental}">
+			<f:selectItem itemLabel="Normal" itemValue="Normal"/>
+			<f:selectItem itemLabel="Calmo" itemValue="Calmo"/>
+			<f:selectItem itemLabel="Apático" itemValue="Apático"/>
+			<f:selectItem itemLabel="Alegre" itemValue="Alegre"/>
+			<f:selectItem itemLabel="Triste" itemValue="Triste"/>
+			<f:selectItem itemLabel="Agitado" itemValue="Agitado"/>
+			<f:selectItem itemLabel="Outros" itemValue="Outros"/>
+		</p:selectOneRadio>
+	</div>
+	
+	<p:separator/>
+	
+	<div id="divisoriaTab">
+		<div>
+			<p:outputLabel class="labelTab" value="Observação"/>
+		</div>
+		
+		<div>
+			<p:inputTextarea class="textoArea" value="#{MBCadProntuario.prontuario.anotObservacao}"/>
+		</div>
+	</div>	
+	
+</ui:composition>

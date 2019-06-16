@@ -1,0 +1,29 @@
+########## Intellij #########
+
+*.iml
+.idea/
+build/
+
+########## Gradle #########
+
+.gradle
+
+########## Eclipse ##########
+
+.classpath
+.settings/
+.project
+classes/
+bin/
+
+########### Maven ###########
+
+target/
+tmp/
+
+########### Android ###########
+
+gen/
+lint.xml
+/.apt_generated
+/project.properties

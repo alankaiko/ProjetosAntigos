@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title><ui:insert name="titulo">Cadastro</ui:insert></title>
+		<h:outputScript library="js" name="validadores.js"/>
+		<h:outputScript library="js" name="layout.js"/>
+		<h:outputStylesheet library="css" name="sistema.css" />
+		
+	</h:head>
+	
+
+	
+	<h:body>		
+		<div class="layout-wrapper">
+			<div id="menuInicial">
+				<ui:include src="/WEB-INF/menu/menu.xhtml"/>
+			</div>
+			
+			<div class="divisao-conteudo">
+				<div id="painelEsquerdo">
+					<ui:include src="/WEB-INF/painelEsquerdo/PainelDoLadoEsquerdo.xhtml"/>
+				</div>
+				
+				<div id="conteudo" class="ativandocont">
+					<ui:insert name="corpo"/>
+				</div>
+			</div>
+			
+		</div>
+		
+	</h:body>
+</html>

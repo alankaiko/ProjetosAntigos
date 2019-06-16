@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/WEB-INF/templates/LayoutCadastro.xhtml">
+	
+	
+	<f:metadata>	
+		<f:viewAction action="#{MBCadFuncionario.Inicializar}"/>
+		<f:viewParam name="editaFuncionario" value="#{MBCadFuncionario.id}"/>
+		<f:event listener="#{MBCadFuncionario.CarregarFuncionarioEditar}" type="preRenderView"/>
+	</f:metadata>
+	
+	
+	<ui:define name="titulo">Cadastrar Funcionários</ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="formulario">
+			<p:messages autoUpdate="true" closable="true" />
+			
+			<div class="layout-content">
+				<div class="conteudo-principal">
+					<div>
+						<p:toolbar>
+				            <p:toolbarGroup>
+				                <p:button value="Novo" icon="fa fa-fw fa-plus" outcome="/funcionarios/Funcionario"/>
+				                <p:commandButton value="Salvar" ajax="false" icon="fa fa-fw fa-save" 
+				                action="#{MBCadFuncionario.Salvando}" actionListener="#{MBCadFuncionario.Redirecionar}"/>  
+					        </p:toolbarGroup>
+				            
+				            <p:toolbarGroup align="right">
+					            <p:button value="Pesquisar" icon="fa fa-fw fa-search" outcome="/funcionarios/GerenciarFuncionarios"/>
+					        </p:toolbarGroup>
+			   			</p:toolbar>  
+					</div>
+		
+					<div>
+						<h3>Cadastrar Funcionário</h3>
+						
+						<div id="painelCadastro">
+							<div class="dadospessoais">
+								<span>Dados Pessoais</span>
+							</div>
+							
+							<div class="rotuloDiv">
+								<p:outputLabel value="Código" class="rotulo"/>	
+							</div>
+							
+							<div class="campos">
+								<p:inputText class="textoCampo" value="#{MBCadFuncionario.funcionario.id}" readonly="true" />
+								
+								<h:panelGroup class="campoDireito" style="width: 50%">
+									<p:selectOneMenu value="#{MBCadFuncionario.funcionario.registroCoren.inscricao}" >
+										<f:selectItems value="#{MBCadFuncionario.listaCoren}"/>
+									</p:selectOneMenu>
+									
+									<p:inputText value="#{MBCadFuncionario.funcionario.registroCoren.coren}"/>
+									
+									<p:selectOneMenu value="#{MBCadFuncionario.funcionario.registroCoren.uf}" >
+										<f:selectItems value="#{MBCadFuncionario.listaEstadosCoren}"/>
+									</p:selectOneMenu>
+								</h:panelGroup>
+							</div>
+						
+							<div class="rotuloDiv">
+								<p:outputLabel value="Nome" class="rotulo"/>
+							</div>
+							
+							<div class="campos">								
+								<p:inputText class="textoMaior" value="#{MBCadFuncionario.funcionario.nome}" 
+									required="true" requiredMessage="Nome do Funcionário obrigatorio"/>
+							</div>
+							
+							<div class="rotuloDiv">
+								<p:outputLabel class="rotulo" value="CPF"/>
+								<p:outputLabel class="rotuloDireito" value="RG"/>
+							</div>
+							
+							<div class="campos">								
+								<p:inputMask mask="999.999.999-99" class="textoCampo" value="#{MBCadFuncionario.funcionario.cpf}" required="true" 
+									requiredMessage="Digite o CPF"/>
+								<p:inputMask mask="9?9999999" class="campoDireito" value="#{MBCadFuncionario.funcionario.rg}" required="true"
+									 requiredMessage="Digite o RG"/>
+							</div>
+							
+							
+							<div class="rotuloDiv">
+								<p:outputLabel class="rotulo" value="Logradouro"/>
+							</div>
+							
+							<div class="campos">
+								<p:inputText class="textoMaior" value="#{MBCadFuncionario.funcionario.endereco.logradouro}"/>								
+							</div>
+							
+							<div class="rotuloDiv">
+								<p:outputLabel class="rotulo" value="Complemento"/>
+							</div>						
+							
+							
+							<div class="campos">
+								<p:inputText class="textoMaior" value="#{MBCadFuncionario.funcionario.endereco.complemento}"/>
+							</div>
+							
+							<div class="rotuloDiv">
+								<p:outputLabel value="Número" class="rotulo"/>
+								<p:outputLabel class="rotulo" value="Bairro"/>
+								<p:outputLabel class="rotuloDireito" value="CEP"/>				
+							</div>
+							
+							<div class="campos">
+								<p:inputText class="textoCampo" value="#{MBCadFuncionario.funcionario.endereco.numero}"/>	
+								<p:inputText style="margin-left: 20px;" class="textoCampo" value="#{MBCadFuncionario.funcionario.endereco.bairro}"/>		
+								<p:inputMask mask="99.999-999" class="campoDireito" value="#{MBCadFuncionario.funcionario.endereco.cep}"/>
+							</div>
+							
+							<div class="rotuloDiv">
+								<p:outputLabel class="rotulo" value="Cidade"/>
+								<p:outputLabel class="rotuloDireito" value="Estado"/>
+							</div>
+							
+							<div class="campos">
+								<p:inputText class="textoCampo" value="#{MBCadFuncionario.funcionario.endereco.cidade}"/>
+								<p:selectOneMenu class="campoDireito" value="#{MBCadFuncionario.funcionario.endereco.estado}" >
+									<f:selectItems value="#{MBCadFuncionario.listaEstados}"/>
+								</p:selectOneMenu>
+							</div>
+							
+							<div class="rotuloDiv">
+								<p:outputLabel class="rotulo" value="Email"/>							
+							</div>
+							
+							<div class="campos">
+								<p:inputText class="textoMaior" value="#{MBCadFuncionario.funcionario.contato.email}"/>							
+							</div>
+							
+							<div class="rotuloDiv">
+								<p:outputLabel class="rotulo" value="Celular"/>
+								<p:outputLabel class="rotuloDireito" value="Telefone"/>
+							</div>
+							
+							<div class="campos" style="margin-bottom: 40px;">
+								<p:inputMask mask="(99) 9 9999-9999" class="textoCampo" value="#{MBCadFuncionario.funcionario.contato.celular}"/>
+								<p:inputMask mask="(99) 9999-9999" class="campoDireito" value="#{MBCadFuncionario.funcionario.contato.telefone}"/>
+							</div>
+							
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

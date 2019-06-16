@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/template/LayoutPadrao.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="editaSalao" value="#{salaoBean.id}"/>
+		<f:event listener="#{salaoBean.CarregarSalaoEditar}" type="preRenderView"/>
+	</f:metadata>
+	
+	<ui:define name="titulo">Registro de Salão</ui:define>
+	
+	<ui:define name="corpo">
+		<h:form id="formulario">
+			<div style="margin: 20px;">
+				<p:messages autoUpdate="true"/>
+				
+				<div>
+					<p:toolbar>
+			            <p:toolbarGroup>
+			                <p:button value="Novo" icon="fa fa-fw fa-plus" outcome="/salao/CadastroSalao"/>
+			                <p:commandButton value="Salvar" ajax="false" icon="fa fa-fw fa-save" 
+			                action="#{salaoBean.SalvarSalao}" actionListener="#{salaoBean.Redirecionar}"/>  
+				        </p:toolbarGroup>
+			            
+			            <p:toolbarGroup align="right">
+				            <p:button value="Pesquisar" icon="fa fa-fw fa-search" outcome="/salao/PesquisaSaloes"/>
+				        </p:toolbarGroup>
+		   			</p:toolbar>  
+				</div>	
+						
+				<p:panelGrid columns="2">				
+					<p:outputLabel value="Código"/>
+					<p:inputText value="#{salaoBean.salao.id}" readonly="true"/>
+					
+					<p:outputLabel value="Descrição"/>
+					<p:inputText value="#{salaoBean.salao.nomeSalao}"/>
+					
+					<p:outputLabel value="Bloco"/>
+					<p:inputText value="#{salaoBean.salao.bloco}"/>
+				</p:panelGrid>		
+			</div>		
+		</h:form>
+	</ui:define>	
+</ui:composition>

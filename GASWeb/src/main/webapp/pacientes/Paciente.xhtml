@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/WEB-INF/templates/LayoutCadastro.xhtml">
+	
+	
+	<f:metadata>	
+		<f:viewAction action="#{MBCadPaciente.Inicializar}"/>
+		<f:viewParam name="editaPaciente" value="#{MBCadPaciente.id}"/>
+		<f:event listener="#{MBCadPaciente.CarregarPacienteEditar}" type="preRenderView"/>
+	</f:metadata>
+	
+	
+	<ui:define name="titulo">Cadastrar Pacientes</ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="formulario">
+			<p:messages autoUpdate="true" closable="true" />
+			
+			<div class="layout-content">
+				<div class="conteudo-principal">
+					<div>
+						<p:toolbar>
+				            <p:toolbarGroup>
+				                <p:button value="Novo" icon="fa fa-fw fa-plus" outcome="/pacientes/Paciente"/>
+				                <p:commandButton value="Salvar" ajax="false" icon="fa fa-fw fa-save" 
+				                action="#{MBCadPaciente.Salvando}" actionListener="#{MBCadPaciente.Redirecionar}"/>  
+					        </p:toolbarGroup>
+				            
+				            <p:toolbarGroup align="right">
+					            <p:button value="Pesquisar" icon="fa fa-fw fa-search" outcome="/pacientes/GerenciarPacientes"/>
+					        </p:toolbarGroup>
+			   			</p:toolbar>  
+					</div>
+				
+					<div>
+						<h3>Cadastrar Paciente</h3>
+						
+						<div id="painelCadastro">
+							<div class="dadospessoais">
+								<span>Dados Pessoais</span>
+							</div>
+							
+							<div class="rotuloDiv">
+								<p:outputLabel value="Código" class="rotulo"/>	
+								<p:outputLabel value="Data Cadastro" class="rotuloDireito"/>
+							</div>
+							
+							<div class="campos">
+								<p:inputText class="textoCampo" value="#{MBCadPaciente.paciente.id}" readonly="true" />
+								<p:calendar style="float:right;" value="#{MBCadPaciente.paciente.dataCad}" readonly="true" showOn="none"/>
+							</div>
+							
+							<div class="rotuloDiv">
+								<p:outputLabel value="Nome" class="rotulo"/>
+							</div>
+							
+							<div class="campos">								
+								<p:inputText class="textoMaior" value="#{MBCadPaciente.paciente.nome}" required="true" requiredMessage="Digite um Paciente"/>
+							</div>
+							
+							<div class="rotuloDiv">
+								<p:outputLabel value="CPF" class="rotulo"/>
+								<p:outputLabel value="RG" class="rotuloDireito"/>
+							</div>
+							
+							<div class="campos">
+								<p:inputMask mask="999.999.999-99" class="textoCampo" value="#{MBCadPaciente.paciente.cpf}" required="true" requiredMessage="Digite o CPF"/>
+								
+								<p:inputMask mask="9?9999999" class="campoDireito" value="#{MBCadPaciente.paciente.rg}" required="true" requiredMessage="Digite o RG"/>
+							</div>
+							
+							<div class="rotuloDiv">
+								<p:outputLabel value="Sexo" class="rotulo"/>
+								<p:outputLabel value="Cor" class="rotulo"/>
+								<p:outputLabel value="Estado Civil" class="rotuloDireito"/>				
+							</div>
+							
+							<div class="campos">
+								<p:selectOneMenu class="comboEsquerda" value="#{MBCadPaciente.paciente.sexo}">
+									<f:selectItems value="#{MBCadPaciente.sexo}"/>
+								</p:selectOneMenu>
+						
+								<p:selectOneMenu style="margin-left: 10%;" class="comboEsquerda" value="#{MBCadPaciente.paciente.raca}">
+									<f:selectItems value="#{MBCadPaciente.raca}"/>
+								</p:selectOneMenu>
+								
+								<p:selectOneMenu class="comboDireita" value="#{MBCadPaciente.paciente.estadoCivil}">
+									<f:selectItems value="#{MBCadPaciente.estadoCivil}"/>
+								</p:selectOneMenu>
+							</div>
+							
+						
+							<div class="rotuloDiv">
+								<p:outputLabel value="Data Nascimento" class="rotulo"/>
+								<p:outputLabel value="Convênio" class="rotuloDireito"/>
+								
+							</div>
+							
+							<div class="campos">
+								<p:calendar class="textoCampo" value="#{MBCadPaciente.paciente.dataNasc}"  navigator="true" yearRange="c-80:c+0" pattern="dd/MM/yyyy"/>
+								
+								<p:selectOneMenu class="campoDireito" value="#{MBCadPaciente.paciente.convenio}" converter="convenioConverter" id="select">
+									<f:selectItem itemLabel=""/>
+									<f:selectItems value="#{MBCadPaciente.listaConvenio}" var="lista" itemValue="#{lista}" itemLabel="#{lista.nome}"/>
+								</p:selectOneMenu>
+								
+								<p:commandLink style="float: right;	margin-right: 15px;	padding-top: 5px;" value="Adicionar?" onclick="PF('adicionaConvenio').show()"/>
+							</div>
+						
+							
+							<div class="rotuloDiv">
+								<p:outputLabel value="Naturalidade" class="rotulo"/>
+								<p:outputLabel value="Procedência" class="rotulo"/>
+								<p:outputLabel value="Profissão" class="rotuloDireito"/>
+							</div>
+							
+							<div class="campos">
+							
+								<p:inputText class="textoCampo" value="#{MBCadPaciente.paciente.naturalidade}"/>								
+								<p:inputText style="margin-left: 20px;" class="textoCampo" value="#{MBCadPaciente.paciente.procedencia}"/>								
+								<p:inputText class="campoDireito" value="#{MBCadPaciente.paciente.profissao}"/>
+							</div>
+							
+							<div class="rotuloDiv">
+								<p:outputLabel value="Logradouro" class="rotulo"/>
+							</div>
+							
+							<div class="campos">
+								<p:inputText class="textoMaior" value="#{MBCadPaciente.paciente.endereco.logradouro}"/>								
+							</div>
+							
+							<div class="rotuloDiv">
+								<p:outputLabel value="Complemento" class="rotulo"/>
+							</div>						
+							
+							
+							<div class="campos">
+								<p:inputText class="textoMaior" value="#{MBCadPaciente.paciente.endereco.complemento}"/>
+							</div>
+							
+							<div class="rotuloDiv">
+								<p:outputLabel value="Número" class="rotulo"/>
+								<p:outputLabel value="Bairro" class="rotulo"/>
+								<p:outputLabel value="CEP" class="rotuloDireito"/>					
+							</div>
+							
+							<div class="campos">
+								<p:inputText class="textoCampo" value="#{MBCadPaciente.paciente.endereco.numero}"/>		
+								<p:inputText style="margin-left: 20px;" class="textoCampo" value="#{MBCadPaciente.paciente.endereco.bairro}"/>
+								<p:inputMask mask="99.999-999" class="campoDireito" value="#{MBCadPaciente.paciente.endereco.cep}"/>
+							</div>
+							
+							<div class="rotuloDiv">
+								<p:outputLabel value="Cidade" class="rotulo"/>
+								<p:outputLabel value="Estado" class="rotuloDireito"/>
+							</div>
+							
+							<div class="campos">
+								<p:inputText class="textoCampo" value="#{MBCadPaciente.paciente.endereco.cidade}"/>
+								<p:selectOneMenu class="campoDireito" value="#{MBCadPaciente.paciente.endereco.estado}" >
+									<f:selectItems value="#{MBCadPaciente.listaEstados}"/>
+								</p:selectOneMenu>
+							</div>
+							
+							<div class="rotuloDiv">
+								<p:outputLabel value="Email" class="rotulo"/>								
+							</div>
+							
+							<div class="campos">
+								<p:inputText class="textoMaior" value="#{MBCadPaciente.paciente.contato.email}"/>								
+							</div>
+													
+							<div class="rotuloDiv">
+								<p:outputLabel value="Celular" class="rotulo"/>
+								<p:outputLabel value="Telefone" class="rotuloDireito"/>
+							</div>
+							
+							<div class="campos">
+								<p:inputMask mask="(99) 9 9999-9999" class="textoCampo" value="#{MBCadPaciente.paciente.contato.celular}"/>
+								<p:inputMask mask="(99) 9999-9999" class="campoDireito" value="#{MBCadPaciente.paciente.contato.telefone}"/>
+							</div>
+							
+							<div class="rotuloDiv">
+								<p:outputLabel value="Filiação"/>
+							</div>
+							
+							<div class="campos">
+								<p:inputText class="campoFiliacao" value="#{MBCadPaciente.paciente.filiacaoPai}" placeholder="Nome do Pai"/>
+								e
+								<p:inputText class="campoFiliacao" value="#{MBCadPaciente.paciente.filiacaoMae}" placeholder="Nome da Mãe"/>
+							</div>
+							
+							<div class="rotuloDiv">
+								<p:outputLabel class="rotulo" value="Cônjugue"/>
+								<p:outputLabel class="rotulo" value="Profissão"/>
+								<p:outputLabel class="rotuloDireito" value="Telefone"/>
+							</div>					
+							
+							<div class="campos">
+								<p:inputText class="textoCampo" value="#{MBCadPaciente.paciente.conjugue.conjugue}"/>
+								<p:inputText style="margin-left: 20px;" class="textoCampo" value="#{MBCadPaciente.paciente.conjugue.profissaoConjugue}" placeholder="Profissão Cônjugue"/>
+								<p:inputText class="campoDireito" value="#{MBCadPaciente.paciente.conjugue.telefoneConjugue}" placeholder="Telefone Cônjugue"/>
+							</div>		
+												
+							<div class="rotuloDiv">
+								<p:outputLabel value="Observação" class="rotulo"/>								
+							</div>
+							
+							<div class="campos">								
+								<p:inputTextarea class="textoMaior" value="#{MBCadPaciente.paciente.observacao}"/>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+		
+		<p:confirmDialog header="Adicionar Convênio?" widgetVar="adicionaConvenio" id="adicionaConvenioDialog">
+			<h:form>
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Código"/>
+					<p:inputText readonly="true" value="#{MBCadConvenio.convenio.id}"/>
+					
+					<p:outputLabel value="Convênio"/>
+					<p:inputText value="#{MBCadConvenio.convenio.nome}"/>
+					
+					<p:button value="Não" onclick="PF('adicionaConvenio').hide(); return false;"/>
+					
+					<p:commandButton value="Adicionar" oncomplete="PF('adicionaConvenio').hide();"
+					actionListener="#{MBCadConvenio.Salvando}" action="#{MBCadPaciente.AtualizaConvenio}" process="@this" 
+						ajax="false" update=":formulario:select"/>
+				</h:panelGrid>
+			</h:form>
+		</p:confirmDialog>
+	</ui:define>
+</ui:composition>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

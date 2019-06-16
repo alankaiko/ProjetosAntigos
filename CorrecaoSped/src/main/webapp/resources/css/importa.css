@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+
+.header{
+	position:relative;
+	padding: 3px;
+}
+
+.div-imagem .img{
+	width: 250px;
+	height: 100px;
+	float: left;
+	padding: 2px;
+}
+
+
+.main-div .div-importar{
+	height: 100;
+	width: 500px;
+	padding: 10px;
+	margin: auto;
+	text-align: center;
+	border: 1px solid #CC0000;
+}
+
+.main-div .div-importar .botao{
+	font-size: 12px;
+}
+
